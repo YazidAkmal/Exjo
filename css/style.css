@@ -1524,35 +1524,34 @@ h3 {
   }
 }
 
-/* line 35, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_about.scss */
-.about_story .story_thumb .thumb.padd_1 {
-  padding-right: 58px;
-}
+
 
 @media (max-width: 767px) {
   /* line 35, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_about.scss */
   .about_story .story_thumb .thumb.padd_1 {
-    padding-right: 0;
+    padding-right: 20px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
   /* line 35, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_about.scss */
   .about_story .story_thumb .thumb.padd_1 {
-    padding-right: 0;
+    padding-right: 20px;
   }
 }
 
 /* line 44, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_about.scss */
 .about_story .story_thumb .thumb img {
-  width: 1195px;
-  height: 500px;
+  width: 400px;
+  height: 600px;
 }
 
-.story_thumb .thumb img{
-  width: 1195px;
-  height: 500px;
+.about_story .story_thumb .thumb.padd_2 img {
+  width: 500px;
+  height: 600px;
 }
+
+
 
 /* line 2, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_counter.scss */
 .counter_wrap .single_counter {
@@ -2112,6 +2111,10 @@ h3 {
 
 .bradcam_bg_5 {
   background-image: url(../img/banner/booking.jpg);
+}
+
+.bradcam_bg_6 {
+  background-image: url(../img/banner/atmin.jpeg);
 }
 
 /* line 13, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_bradcam.scss */
@@ -2908,7 +2911,7 @@ h3 {
 
 /* line 80, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_destination.scss */
 .destination_banner_wrap {
-  background-image: url(../img/banner/destination.png);
+  background-image: url(../img/banner/promo.jpg);
   padding: 340px 0;
   background-size: cover;
   background-position: center center;
