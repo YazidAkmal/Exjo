@@ -1,0 +1,468 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>EXJO Admin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/assets/carousel/exjo.ico">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/gijgo.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slicknav.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-sidebar {
+            background: #1a1a1a;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        .admin-sidebar .nav-link {
+            color: #fff;
+            padding: 12px 20px;
+            border-bottom: 1px solid #333;
+        }
+        .admin-sidebar .nav-link:hover, .admin-sidebar .nav-link.active {
+            background: #0B8E86;
+            color: #fff;
+        }
+        .admin-sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        .admin-content {
+            padding: 30px;
+        }
+        .dashboard-card {
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+        .dashboard-card i {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        .card-bookings {
+            background: linear-gradient(45deg, #ff4a52, #ff9068);
+        }
+        .card-destinations {
+            background: linear-gradient(45deg, #4776E6, #8E54E9);
+        }
+        .card-reviews {
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+        }
+        .card-users {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+        }
+        .table-responsive {
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+        .form-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+
+<body>
+
+<script>
+function doLogin(e) {
+    e.preventDefault();
+    document.getElementById('loginSection').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+}
+</script>
+
+    <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="logo">
+                                    <a href="index.html">
+                                        <img src="img/logo.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-8 col-lg-8">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="admin.html">Beranda</a></li>
+                                            <li><a href="#pesanan">Pesanan</a></li>
+                                            <li><a href="#destinasi">Destinasi</a></li>
+                                            <li><a href="#ulasan">Ulasan</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 d-none d-lg-block">
+                                <div class="social_wrap d-flex align-items-center justify-content-end">
+                                    <!--<div class="social_links d-none d-xl-block">
+                                        <ul>
+                                            <li><a href="#"> <i class="fa fa-user"></i> Admin </a></li>
+                                            <li><a href="logout.php"> <i class="fa fa-sign-out"></i> </a></li>
+                                        </ul>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 admin-sidebar">
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="#dashboard">
+                        <i class="fa fa-tachometer"></i> Dashboard
+                    </a>
+                    <a class="nav-link" href="#pesanan">
+                        <i class="fa fa-calendar-check-o"></i> Pesanan
+                    </a>
+                    <a class="nav-link" href="#destinasi">
+                        <i class="fa fa-map-marker"></i> Destinasi
+                    </a>
+                    <a class="nav-link" href="#ulasan">
+                        <i class="fa fa-comments"></i> Ulasan
+                    </a>
+                    <a class="nav-link" href="#tambah-destinasi">
+                        <i class="fa fa-plus-circle"></i> Tambah Destinasi
+                    </a>
+                </nav>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-10 admin-content">
+                <!-- Dashboard Section -->
+                <section id="beranda">
+                    <h2 class="mb-4">Ringkasan Beranda</h2>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="dashboard-card card-bookings">
+                                <i class="fa fa-calendar"></i>
+                                <h3>24</h3>
+                                <p>Pesanan Baru</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="dashboard-card card-destinations">
+                                <i class="fa fa-map-marker"></i>
+                                <h3>50</h3>
+                                <p>Destinasi</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="dashboard-card card-reviews">
+                                <i class="fa fa-comments"></i>
+                                <h3>15</h3>
+                                <p>Ulasan Baru</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="dashboard-card card-users">
+                                <i class="fa fa-users"></i>
+                                <h3>120</h3>
+                                <p>Total Pengguna</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Pesanan Terbaru</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Pelanggan</th>
+                                                    <th>Destinasi</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Status</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>#12345</td>
+                                                    <td>IShowSiuuu</td>
+                                                    <td>Kebun Binatang Gembira Loka</td>
+                                                    <td>2024-06-15</td>
+                                                    <td><span class="badge badge-success">Diterima</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-success">Terima</button>
+                                                        <button class="btn btn-sm btn-danger">Tolak</button>
+                                                        <button class="btn btn-sm btn-info">Lihat</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Bookings Section -->
+                <section id="pesanan" class="mt-5">
+                    <h2 class="mb-4">Kelola Pemesanan</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Pesanan ID</th>
+                                    <th>Pelanggan</th>
+                                    <th>Paket</th>
+                                    <th>Tanggal</th>
+                                    <th>Orang</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#BK1001</td>
+                                    <td>IShowSiuuu</td>
+                                    <td>Kebun Binatang Gembira Loka</td>
+                                    <td>2024-06-20</td>
+                                    <td>2</td>
+                                    <td>Rp 120.000</td>
+                                    <td><span class="badge badge-success">Diterima</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-success">Terima</button>
+                                        <button class="btn btn-sm btn-danger">Tolak</button>
+                                        <button class="btn btn-sm btn-info">Lihat</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Destinations Section -->
+                <section id="destinasi" class="mt-5">
+                    <h2 class="mb-4">Kelola Destinasi</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Gambar</th>
+                                    <th>Destinasi</th>
+                                    <th>Lokasi</th>
+                                    <th>Harga</th>
+                                    <th>Ulasan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><img src="img/assets/yk/gembiraloka/cover.jpg" width="50" height="50" class="rounded"></td>
+                                    <td>Kebun Binatang Gembira Loka</td>
+                                    <td>Yogyakarta</td>
+                                    <td>Rp 60,000</td>
+                                    <td>5.0</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Reviews Section -->
+                <section id="ulasan" class="mt-5">
+                    <h2 class="mb-4">Ulasan Pelanggan</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Pelanggan</th>
+                                    <th>Destinasi</th>
+                                    <th>Ulasan</th>
+                                    <th>Komentar</th>
+                                    <th>Tanggal</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>IShowSiuuu</td>
+                                    <td>Kebun Binatang Gembira Loka</td>
+                                    <td>
+                                        <i class="fa fa-star text-warning"></i>
+                                        <i class="fa fa-star text-warning"></i>
+                                        <i class="fa fa-star text-warning"></i>
+                                        <i class="fa fa-star text-warning"></i>
+                                        <i class="fa fa-star text-warning"></i>
+                                    </td>
+                                    <td>Mantap! Binantangnya lucu bangettt.</td>
+                                    <td>2023-06-25</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info">Lihat</button>
+                                        <button class="btn btn-sm btn-danger">Hapus</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Add Destination Section -->
+                <section id="tambah-destinasi" class="mt-5">
+                    <h2 class="mb-4">Tambah Destinasi Baru</h2>
+                    <div class="form-container">
+                        <form id="destinationForm" action="tambah_destinasi.php" method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Nama Destinasi</label>
+                                        <input type="text" class="form-control" id="name" name="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="location">Lokasi</label>
+                                        <select class="form-control" id="location" name="location" required>
+                                            <option value="">Pilih Lokasi</option>
+                                            <option value="Yogyakarta">Yogyakarta</option>
+                                            <option value="Sleman">Sleman</option>
+                                            <option value="Bantul">Bantul</option>
+                                            <option value="Gunung Kidul">Gunung Kidul</option>
+                                            <option value="Kulon Progo">Kulon Progo</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Harga Tiket Masuk (Rp)</label>
+                                        <input type="number" class="form-control" id="price" name="price" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="description">Deskripsi</label>
+                                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image">Unggah gambar</label>
+                                        <input type="file" class="form-control-file" id="image" name="image" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Tambah Destinasi</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS here -->
+    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/ajax-form.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/scrollIt.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/gijgo.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    
+    <!--contact js-->
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Smooth scrolling for anchor links
+        $(document).on('click', 'a[href^="#"]', function (event) {
+            event.preventDefault();
+            $('html, body').animate({
+                scrollTop: $($.attr(this, 'href')).offset().top - 20
+            }, 500);
+        });
+        
+        // Highlight current section in sidebar
+        $(window).scroll(function() {
+            var scrollDistance = $(window).scrollTop() + 200;
+            
+            $('section').each(function(i) {
+                if ($(this).position().top <= scrollDistance) {
+                    $('.admin-sidebar a.active').removeClass('active');
+                    $('.admin-sidebar a').eq(i).addClass('active');
+                }
+            });
+        }).scroll();
+    </script>
+
+<script>
+  const logoutLinks = document.querySelectorAll('a[href="logout.php"]');
+  logoutLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('loginSection').style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
