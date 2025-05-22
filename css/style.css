@@ -2162,19 +2162,6 @@ h3 {
   margin-top: 10px;
 }
 
-.lihat-lebih-btn {
-  display: inline-block;
-  margin-top: 10px;
-  font-weight: 500;
-  cursor: pointer;
-  color: #0B8E86 !important;
-  text-decoration: underline !important;
-}
-
-.extra-detail {
-  margin-top: 10px;
-}
-
 .d-none {
   display: none;
 }
@@ -3285,6 +3272,28 @@ h3 {
   transition: 0.3s;
 }
 
+.lihat-lebih-btn {
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #0B8E86 !important;
+  text-decoration: underline !important;
+}
+
+.extra-detail {
+  margin-top: 10px;
+}
+
+.extra-detail a{
+  font-size: 14px;
+  font-weight: 400;
+  color: #7A838B;
+  margin-top: 2px;
+  margin-bottom: 7px;
+  text-decoration: underline !important;
+}
+
 /* line 34, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
 .popular_places_area .single_place .place_info {
   padding: 27px 20px 25px 20px;
@@ -3303,7 +3312,7 @@ h3 {
 }
 
 /* line 43, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_popular_place.scss */
-.popular_places_area .single_place .place_info p {
+.popular_places_area .single_place .place_info p  {
   font-size: 14px;
   font-weight: 400;
   color: #7A838B;
@@ -6902,6 +6911,39 @@ h6 {
 .blog_part .single-home-blog .card ul li span {
   margin-right: 10px;
   font-size: 12px;
+}
+
+.image-slider {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+.slider-image {
+    width: 100%;
+    display: none;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.slider-image.active {
+    display: block;
+}
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+.slider-controls button {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */

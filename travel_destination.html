@@ -235,7 +235,7 @@
                                     <a class="lihat-lebih-btn text-primary">Lihat lebih</a>
 
                                     <div class="extra-detail d-none">
-                                        <p><strong>Deskripsi:</strong> Goa Cerme adalah tempat wisata alam ksadhahakhdakdadad dengan lorong bawah tanah yang indah.</p>
+                                        <p><strong>Deskripsi:</strong> Pantai Glagah Indah adalah ksadhahakhdakdadad dengan lorong bawah tanah yang indah.</p>
                                         <p><strong>Fasilitas:</strong> Toilet, Mushola, Parkirsjadjsakdbadba djsajdba</p>
                                     </div>
                                 </div>
@@ -276,7 +276,7 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="single_place">
                                 <div class="thumb">
-                                    <img src="img/place/4.png" alt="">
+                                    <img src="img/assets/kp/glagah/cover.jpg" alt="">
                                     <a href="#" class="prise">Rp10.000</a>
                                 </div>
                                 <div class="place_info">
@@ -299,9 +299,19 @@
                                     <a class="lihat-lebih-btn text-primary">Lihat lebih</a>
 
                                     <div class="extra-detail d-none">
-                                        <p><strong>Deskripsi:</strong> Goa Cerme adalah tempat wisata alam dengan lorong bawah tanah yang indah.</p>
+                                        <p><strong>Deskripsi:</strong> Pantai glagah indah adalah tempat wisata alam pantai yang indah dengan pemecah ombaknya.</p>
                                         <p><strong>Fasilitas:</strong> Toilet, Mushola, Parkir</p>
+                                        <a href="https://maps.app.goo.gl/PGT7usf27NZkkxHX9"><strong>Alamat:</strong> Jl. Glagah, Glagah, Kec. Temon, Kabupaten Kulon Progo, Daerah Istimewa Yogyakarta 55654</a>
+                                        <div class="image-slider mt-3">
+                                        <img src="img/assets/kp/glagah/1.jpg" alt="Foto 1" class="slider-image active">
+                                        <img src="img/assets/kp/glagah/2.jpg" alt="Foto 2" class="slider-image">
+                                        <img src="img/assets/kp/glagah/3.png" alt="Foto 3" class="slider-image">
+                                        <div class="slider-controls">
+                                            <button class="prev">❮</button>
+                                            <button class="next">❯</button>
+                                        </div>
                                     </div>
+                                    </div>                                  
                                 </div>
                             </div>
                         </div>
@@ -545,7 +555,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>Un
     <script src="js/jquery.form.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        const images = document.querySelectorAll(".slider-image");
+        let currentIndex = 0;
 
+        function showImage(index) {
+            images.forEach((img, i) => {
+                img.classList.toggle("active", i === index);
+            });
+        }
+
+        document.querySelector(".prev").addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+        });
+
+        document.querySelector(".next").addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        });
+
+        showImage(currentIndex);
+        });
+    </script>
 
     <script src="js/main.js"></script>
     <script>
