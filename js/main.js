@@ -96,11 +96,11 @@ $('.testmonial_active').owlCarousel({
 });
 
 $( function() {
-  $( "#slider-range" ).slider({
+  /*$( "#slider-range" ).slider({
     range: true,
-    min: 500000,
+    min: 0,
     max: 10000000,
-    values: [ 1000000, 5000000 ],
+    values: [ 0, 1000000 ],
     slide: function( event, ui ) {
       $( "#amount" ).val( formatRupiah(ui.values[ 0 ]) + " - " + formatRupiah(ui.values[ 1 ]) );
     }
@@ -110,7 +110,7 @@ $( function() {
     formatRupiah($( "#slider-range" ).slider( "values", 0 )) +
     " - " +
     formatRupiah($( "#slider-range" ).slider( "values", 1 ))
-  );
+  ); */
 
   // Fungsi untuk format angka ke Rupiah
   function formatRupiah(angka) {
