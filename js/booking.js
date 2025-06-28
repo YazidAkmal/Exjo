@@ -33,7 +33,7 @@ $(document).ready(function(){
                 },
                 catatan: {
                     required: false,
-                    minlength: 20
+                    minlength: 5
                 },
                 bulan: {
                     required: true

@@ -1,4 +1,5 @@
 <?php 
+include 'init.php';
 include 'header.php'; 
 ?>
 <!doctype html>
@@ -134,6 +135,7 @@ include 'header.php';
         </div>
     </div>
     
+<<<<<<< HEAD
     <!--Footer-->
     <footer class="footer">
         <div class="footer_top">
@@ -250,6 +252,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>Un
         </div>
     </footer>
 
+=======
+<?php
+ include 'footer.php';
+ ?>
+>>>>>>> a575031 (No changes to commit.)
 
   <!-- Modal 
   <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
