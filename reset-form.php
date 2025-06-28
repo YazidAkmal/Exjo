@@ -66,5 +66,44 @@ if (!isset($_SESSION['email_for_reset'])) {
             </form>
         </div>
     </div>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.has('status')) {
+        const status = urlParams.get('status');
+        const error = urlParams.get('error'); 
+        const brandColor = '#1EC6B6';
+
+        let title, text, icon;
+
+        if (status === 'sukses') {
+            title = 'Berhasil!';
+            text = 'Aksi Anda telah berhasil diproses.'; 
+            icon = 'success';
+        } else { 
+            title = 'Oops... Terjadi Kesalahan';
+            text = error || 'Silakan periksa kembali isian Anda dan coba lagi.'; 
+            icon = 'error';
+        }
+
+        if (window.location.pathname.includes('reservasi.php') && status === 'sukses') {
+            text = 'Terima kasih, reservasi Anda telah kami terima dan akan segera diproses.';
+        }
+
+        Swal.fire({
+            icon: icon,
+            title: title,
+            text: text,
+            confirmButtonColor: brandColor 
+        });
+
+        window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+    }
+});
+    </script>
 </body>
 </html>

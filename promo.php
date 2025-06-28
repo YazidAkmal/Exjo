@@ -1,4 +1,5 @@
 <?php 
+include 'init.php';
 include 'header.php'; 
 ?>
 <!doctype html>
@@ -134,7 +135,7 @@ include 'header.php';
         </div>
     </div>
     
-     <?php
+<?php
  include 'footer.php';
  ?>
 

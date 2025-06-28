@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'init.php'; 
 include 'database.php';
 
 if (!isset($_SESSION['user_id'])) {
@@ -8,17 +8,18 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$paket = $_POST['paket'];
-$bulan = $_POST['bulan'];
+$destination_id = $_POST['destination_id'];
+$tanggal_pemesanan = $_POST['tanggal_pemesanan']; 
 $catatan = $_POST['catatan'];
 
-if (empty($paket) || empty($bulan)) {
+if (empty($destination_id) || empty($tanggal_pemesanan)) {
     header("Location: reservasi.php?status=gagal");
     exit();
 }
 
-$stmt = $main_conn->prepare("INSERT INTO bookings (user_id, package_name, booking_month, notes) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("isss", $user_id, $paket, $bulan, $catatan);
+$stmt = $main_conn->prepare("INSERT INTO bookings (user_id, destination_id, booking_date, notes) VALUES (?, ?, ?, ?)");
+
+$stmt->bind_param("iiss", $user_id, $destination_id, $tanggal_pemesanan, $catatan);
 
 if ($stmt->execute()) {
     header("Location: reservasi.php?status=sukses");

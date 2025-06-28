@@ -161,5 +161,32 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>EX
     });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('login_error')) {
+        alert("Username/Email atau Password salah!");
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    const profileTrigger = document.getElementById('profileTrigger');
+    const dropdownContent = document.getElementById('profileDropdownContent');
+
+    if (profileTrigger) {
+        profileTrigger.addEventListener('click', function(event) {
+            dropdownContent.classList.toggle('show');
+            event.stopPropagation(); 
+        });
+    }
+
+    window.addEventListener('click', function(event) {
+        if (dropdownContent && dropdownContent.classList.contains('show')) {
+            if (!profileTrigger.contains(event.target)) {
+                dropdownContent.classList.remove('show');
+            }
+        }
+    });
+});
+</script>
+
 </body>
 </html>

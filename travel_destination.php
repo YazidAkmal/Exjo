@@ -1,10 +1,12 @@
 <?php
 include 'database.php';
-include 'header.php'; 
+include 'init.php';
+include 'header.php';
+
 $daerah = isset($_GET['daerah']) ? $_GET['daerah'] : '';
 $paket = isset($_GET['paket']) ? $_GET['paket'] : '';
-$harga_min = isset($_GET['harga_min']) ? (int)$_GET['harga_min'] : 0;
-$harga_max = isset($_GET['harga_max']) ? (int)$_GET['harga_max'] : 1000000;
+$harga_min = isset($_GET['harga_min']) ? (int) $_GET['harga_min'] : 0;
+$harga_max = isset($_GET['harga_max']) ? (int) $_GET['harga_max'] : 1000000;
 
 $sql = "SELECT * FROM destinations WHERE price BETWEEN ? AND ?";
 $params = [$harga_min, $harga_max];
@@ -13,7 +15,7 @@ $types = "ii";
 if (!empty($daerah)) {
     $sql .= " AND location = ?";
     $params[] = $daerah;
-    $types .= "s"; 
+    $types .= "s";
 }
 
 if (!empty($paket)) {
@@ -25,11 +27,19 @@ if (!empty($paket)) {
 $stmt = $main_conn->prepare($sql);
 $stmt->bind_param($types, ...$params);
 $stmt->execute();
-$result_destinations = $stmt->get_result();
+$stmt->bind_result($id, $name, $location, $description, $price, $image_path, $package_type, $link);
+
+$destinations_data = [];
+while ($stmt->fetch()) {
+    $destinations_data[] = [
+        'id' => $id, 'name' => $name, 'location' => $location, 'description' => $description,
+        'price' => $price, 'image_path' => $image_path, 'package_type' => $package_type, 'link' => $link
+    ];
+}
+$stmt->close();
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -48,9 +58,7 @@ $result_destinations = $stmt->get_result();
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-
     <div class="bradcam_area bradcam_bg_2">
         <div class="container">
             <div class="row">
@@ -63,6 +71,7 @@ $result_destinations = $stmt->get_result();
             </div>
         </div>
     </div>
+
     <div class="popular_places_area">
         <div class="container">
             <div class="row justify-content-center">
@@ -125,8 +134,21 @@ $result_destinations = $stmt->get_result();
                 <div class="col-lg-8">
                     <div class="row">
                         <?php
-                        if ($result_destinations && $result_destinations->num_rows > 0) {
-                            while($row = $result_destinations->fetch_assoc()) {
+                        if (!empty($destinations_data)) {
+                            foreach ($destinations_data as $row) {
+                                $destination_id = $row['id'];
+
+                                $img_sql = "SELECT path FROM detail_image WHERE destinations_id = ?";
+                                $img_stmt = $main_conn->prepare($img_sql);
+                                $img_stmt->bind_param("i", $destination_id);
+                                $img_stmt->execute();
+                                $img_stmt->bind_result($gallery_image_path);
+
+                                $images = [];
+                                while ($img_stmt->fetch()) {
+                                    $images[] = $gallery_image_path;
+                                }
+                                $img_stmt->close();
                         ?>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="single_place">
@@ -146,15 +168,30 @@ $result_destinations = $stmt->get_result();
                                                      <a href="#">(Review)</a>
                                                 </span>
                                             </div>
-                                            <a class="lihat-lebih-btn text-primary">Lihat lebih</a>
-                                            <div class="extra-detail d-none">
-                                                <p><strong>Deskripsi:</strong> <?php echo htmlspecialchars($row['description']); ?></p>
+                                            <a class="lihat-lebih-btn text-primary" style="cursor: pointer;">Lihat lebih</a>
+                                            <div class="extra-detail d-none mt-2">
+                                                <p><strong>Deskripsi:</strong> <?php echo nl2br(htmlspecialchars($row['description'])); ?></p>
+                                                <p><strong>Alamat:</strong> <a href="<?php echo htmlspecialchars($row['link']); ?>" target="_blank"><?php echo htmlspecialchars($row['location']); ?></a></p>
+                                                <?php if (!empty($images)): ?>
+                                                    <p><strong>Galeri:</strong></p>
+                                                    <div class="image-slider">
+                                                        <?php foreach ($images as $i => $img): ?>
+                                                            <img src="<?php echo htmlspecialchars($img); ?>" alt="Foto <?php echo htmlspecialchars($row['name']) . ' ' . ($i + 1); ?>" class="slider-image" style="width:100%; height:auto; display:<?php echo $i === 0 ? 'block' : 'none'; ?>;">
+                                                        <?php endforeach; ?>
+                                                        <?php if (count($images) > 1): ?>
+                                                            <div class="slider-controls mt-2 text-center">
+                                                                <button type="button" class="prev-slide btn btn-sm btn-dark">‹</button>
+                                                                <button type="button" class="next-slide btn btn-sm btn-dark">›</button>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <?php
-                            } 
+                        <?php
+                            }
                         } else {
                             echo '<div class="col-lg-12"><div class="alert alert-info text-center">Tidak ada destinasi yang ditemukan sesuai kriteria filter Anda.</div></div>';
                         }
@@ -165,7 +202,8 @@ $result_destinations = $stmt->get_result();
         </div>
     </div>
 
-    
+    <?php include 'footer.php'; ?>
+
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -184,16 +222,14 @@ $result_destinations = $stmt->get_result();
     <script src="js/jquery.slicknav.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
+   <!-- <script src="js/main.js"></script>  -->
 
     <script>
-    $(function() {
+    $(document).ready(function() {
         $('select').niceSelect();
         $("#slider-range").slider({
-            range: true,
-            min: 0,
-            max: 1000000,
-            values: [ <?php echo $harga_min; ?>, <?php echo $harga_max; ?> ],
+            range: true, min: 0, max: 1000000,
+            values: [<?php echo $harga_min; ?>, <?php echo $harga_max; ?>],
             slide: function(event, ui) {
                 $("#amount").val("Rp" + ui.values[0].toLocaleString('id-ID') + " - Rp" + ui.values[1].toLocaleString('id-ID'));
                 $("#harga_min").val(ui.values[0]);
@@ -202,11 +238,25 @@ $result_destinations = $stmt->get_result();
         });
         $("#amount").val("Rp" + $("#slider-range").slider("values", 0).toLocaleString('id-ID') +
             " - Rp" + $("#slider-range").slider("values", 1).toLocaleString('id-ID'));
+
+        $('.col-lg-8').on('click', '.lihat-lebih-btn', function(e) {
+            e.preventDefault();
+            var detailDiv = $(this).closest('.place_info').find('.extra-detail');
+            detailDiv.toggleClass('d-none');
+            $(this).text(detailDiv.hasClass('d-none') ? 'Lihat lebih' : 'Sembunyikan');
+        });
+
+        $('.col-lg-8').on('click', '.prev-slide, .next-slide', function() {
+            var slider = $(this).closest('.image-slider');
+            var images = slider.find('.slider-image');
+            var currentIndex = images.filter(':visible').index();
+            var newIndex = $(this).hasClass('prev-slide') 
+                ? (currentIndex - 1 + images.length) % images.length
+                : (currentIndex + 1) % images.length;
+            
+            images.hide().eq(newIndex).show();
+        });
     });
     </script>
-    <?php
-    include 'footer.php';
-    ?>
 </body>
-
 </html>

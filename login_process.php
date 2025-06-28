@@ -32,13 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['password_hash'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['first_name'];
-            header("Location: " . "index.php"); 
+            header("Location: index.php"); 
             exit();
         }
     }
     $stmt_user->close();
-
-    header("Location: " . $previous_page . "?login_error=1");
+    header("Location: login.php?error=Username atau Password yang Anda masukkan salah.");
     exit();
 }
 ?>

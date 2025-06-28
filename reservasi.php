@@ -1,226 +1,165 @@
 <?php
-/*if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true) {
+include 'init.php';
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
-    exit;
-    }*/
-    include 'init.php';
-    if (!isset($_SESSION['user_id'])){
-    header("Location: login.php");
-    echo "<script>window.location.href='login.php';</script>";
-    exit;
-    }
-    include 'header.php';
+    exit();
+}
+include 'database.php';
+
+$user_id = $_SESSION['user_id'];
+$stmt_user = $main_conn->prepare("SELECT first_name, last_name, email FROM users WHERE id = ?");
+$stmt_user->bind_param("i", $user_id);
+$stmt_user->execute();
+$user_data = $stmt_user->get_result()->fetch_assoc();
+$stmt_user->close();
+
+// Ambil semua lokasi
+$locations = [];
+$loc_result = $main_conn->query("SELECT DISTINCT location FROM destinations ORDER BY location");
+while ($row = $loc_result->fetch_assoc()) {
+    $locations[] = $row['location'];
+}
+
+include 'header.php';
 ?>
-<!doctype html>
-<html class="no-js" lang="zxx">
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>EXJO</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Nice Select & Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-	<!-- <link rel="manifest" href="site.webmanifest"> -->
-	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-	<!-- Place favicon.ico in the root directory -->
-
-	<!-- CSS here -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/magnific-popup.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/themify-icons.css">
-	<link rel="stylesheet" href="css/nice-select.css">
-	<link rel="stylesheet" href="css/flaticon.css">
-	<link rel="stylesheet" href="css/gijgo.css">
-	<link rel="stylesheet" href="css/animate.css">
-	<link rel="stylesheet" href="css/slicknav.css">
-	<link rel="stylesheet" href="css/style.css">
-	<!-- <link rel="stylesheet" href="css/responsive.css"> -->
-</head>
-
-<body>
-	<!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-
-	<div class="bradcam_area bradcam_bg_5">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="bradcam_text text-center">
-                        <h3>Reservasi</h3>
-                        <p>Silahkan isi form reservasi anda, ENJOY.</p>
-                    </div>
+<div class="bradcam_area bradcam_bg_5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text text-center">
+                    <h3>Reservasi</h3>
+                    <p>Silakan pilih destinasi Anda.</p>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-	<!--content-->
-<?php
-if (isset($_GET['status'])) {
-    if ($_GET['status'] == 'sukses') {
-        echo '<div class="alert alert-success text-center" role="alert">Reservasi Anda telah berhasil dikirim! Kami akan segera menghubungi Anda.</div>';
-    } else {
-        echo '<div class="alert alert-danger text-center" role="alert">Terjadi kesalahan. Mohon periksa kembali isian Anda dan coba lagi.</div>';
-    }
-}
-?>
-	<section class="contact-section">
-		<div class="container">
-			<div class="row" style="justify-content: center;">
-				<div class="col-12" >
-					<h2 class="booking-title" style="justify-content: center;">Silahkan mengisi data reservasi</h2>
-				</div>
-				<div class="col-lg-8">
-					<form class="form-booking booking_form" action="booking_process.php" method="post" id="contactForm" novalidate="novalidate">
-						<div class="row">
-							<div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                  <input class="form-control" name="first_name" id="first_name" type="text" placeholder="First Name" required>
-                                </div>
-                              </div>
-                          
-                              <!-- Last Name -->
-                              <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                  <input class="form-control" name="last_name" id="last_name" type="text" placeholder="Last Name">
-                                </div>
-                              </div>
-                          
-                              <!-- Email -->
-                              <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                  <input class="form-control" name="email" id="email" type="email" placeholder="Email" required>
-                                </div>
-                              </div>
-                          
-                              <!-- Nomor HP -->
-                              <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                  <input class="form-control" name="phone" id="phone" type="text" placeholder="Nomor HP (08xxxxxxx)" required>
-                                </div>
-                              </div>
-                          
-                              <!-- Alamat -->
-                              <div class="col-12 mb-3">
-                                <div class="form-group">
-                                  <textarea class="form-control" name="alamat" id="alamat" rows="3" placeholder="Alamat Lengkap (Nama Jalan, No. Rumah, Nama Dusun RT/RW, Desa, Kecamatan, Kabupaten, Provinsi)" required></textarea>
-                                </div>
-                              </div>
-                          
-                              <!-- Pilih Paket -->
-                              <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                  <select class="form-control" name="paket" id="paket" required>
-                                    <option value="" disabled selected>Pilih Paket</option>
-                                    <option value="sleman">Paket Sleman</option>
-                                    <option value="jogja">Paket Jogja</option>
-                                    <option value="bantul">Paket Bantul</option>
-                                    <option value="gk">Paket Gunungkidul</option>
-                                    <option value="kp">Paket Kulon Progo</option>
-                                  </select>
-                                </div>
-                              </div>
-                          
-                              <!-- Pilih Bulan -->
-                              <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                  <select class="form-control" name="bulan" id="bulan" required>
-                                    <option value="" disabled selected>Pilih Bulan Pemesanan</option>
-                                    <option value="Januari">Januari</option>
-                                    <option value="Februari">Februari</option>
-                                    <option value="Maret">Maret</option>
-                                    <option value="April">April</option>
-                                    <option value="Mei">Mei</option>
-                                    <option value="Juni">Juni</option>
-                                    <option value="Juli">Juli</option>
-                                    <option value="Agustus">Agustus</option>
-                                    <option value="September">September</option>
-                                    <option value="Oktober">Oktober</option>
-                                    <option value="November">November</option>
-                                    <option value="Desember">Desember</option>
-                                  </select>
-                                </div>
-                              </div>
-                          
-                              <!-- Catatan -->
-                              <div class="col-12 mb-3">
-                                <div class="form-group">
-                                  <textarea class="form-control" name="catatan" id="catatan" rows="3" placeholder="Catatan Tambahan (opsional)"></textarea>
-                                </div>
-                              </div>
-                          
-						</div>
-						<div class="form-group mt-3">
-							<button type="submit" class="button button-contactForm boxed-btn">Kirim</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
+<section class="contact-section">
+    <div class="container">
+        <div class="row" style="justify-content: center;">
+            <div class="col-lg-8">
+                <h2 class="booking-title text-center mb-5 mt-4">Silahkan Melengkapi Data Reservasi</h2>
+                <form action="booking_process.php" method="POST" class="form-contact contact_form">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <input class="form-control" type="text" value="Nama: <?= htmlspecialchars($user_data['first_name'] . ' ' . $user_data['last_name'] ?? '') ?>" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <input class="form-control" type="email" value="Email: <?= htmlspecialchars($user_data['email'] ?? '') ?>" readonly>
+                            </div>
+                        </div>
 
-    <?php
-        include 'footer.php';
-    ?>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <select name="lokasi" id="lokasi" class="form-control wide" required>
+                                    <option value="">Pilih Lokasi</option>
+                                    <?php foreach ($locations as $loc): ?>
+                                        <option value="<?= htmlspecialchars($loc) ?>"><?= htmlspecialchars($loc) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
 
-  <!-- Modal -->
-  <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="serch_form">
-            <input type="text" placeholder="Search" >
-            <button type="submit">search</button>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <select name="destination_id" id="destinasi" class="form-control wide" required>
+                                    <option value="">Pilih Lokasi Dahulu</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <div class="form-group">
+                                <input type="text" name="tanggal_pemesanan" id="tanggal-flatpickr" class="form-control" placeholder="Pilih Tanggal Pemesanan" required>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mb-3">
+                            <div class="form-group">
+                                <textarea name="catatan" class="form-control" rows="4" placeholder="Catatan Tambahan (opsional)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3 text-center">
+                        <button type="submit" class="button button-contactForm boxed-btn">Kirim Reservasi</button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</section>
 
-	<!-- JS here -->
-	<script src="js/vendor/modernizr-3.5.0.min.js"></script>
-	<script src="js/vendor/jquery-1.12.4.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/isotope.pkgd.min.js"></script>
-	<script src="js/ajax-form.js"></script>
-	<script src="js/waypoints.min.js"></script>
-	<script src="js/jquery.counterup.min.js"></script>
-	<script src="js/imagesloaded.pkgd.min.js"></script>
-	<script src="js/scrollIt.js"></script>
-	<script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/wow.min.js"></script>
-	<script src="js/nice-select.min.js"></script>
-	<script src="js/jquery.slicknav.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/plugins.js"></script>
-	<script src="js/gijgo.min.js"></script>
+<?php include 'footer.php'; ?>
 
-	<!--contact js-->
-    <script src="js/booking.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/jquery.form.js"></script>
-	<script src="js/jquery.validate.min.js"></script>
-	<script src="js/mail-script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-	<script src="js/main.js"></script>
-    <script>
-        $('#datepicker').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-             rightIcon: '<span class="fa fa-caret-down"></span>'
-         }
+<script>
+$(document).ready(function () {
+
+    $('select').niceSelect();
+
+    flatpickr("#tanggal-flatpickr", {
+        dateFormat: "Y-m-d",
+        minDate: "today"
+    });
+
+    $('#lokasi').on('change', function () {
+        let lokasiVal = $(this).val();
+        let destinasi = $('#destinasi');
+
+        if (lokasiVal) {
+            destinasi.html('<option value="">Memuat...</option>');
+            $.post('get_destinations.php', { location: lokasiVal }, function (data) {
+                destinasi.html(data);
+                destinasi.niceSelect('destroy');
+                destinasi.niceSelect();
+            });
+        } else {
+            destinasi.html('<option value="">Pilih Lokasi Dahulu</option>');
+            destinasi.niceSelect('destroy');
+            destinasi.niceSelect();
+        }
+    });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('status')) {
+        const status = urlParams.get('status');
+        const error = urlParams.get('error');
+        const brandColor = '#1EC6B6';
+
+        let title, text, icon;
+
+        if (status === 'sukses') {
+            title = 'Berhasil!';
+            text = 'Terima kasih, reservasi Anda telah kami terima.';
+            icon = 'success';
+        } else {
+            title = 'Gagal';
+            text = error || 'Terjadi kesalahan saat mengirim data.';
+            icon = 'error';
+        }
+
+        Swal.fire({
+            icon: icon,
+            title: title,
+            text: text,
+            confirmButtonColor: brandColor
         });
-        $('#datepicker2').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-             rightIcon: '<span class="fa fa-caret-down"></span>'
-         }
 
-        });
-    </script>
-</body>
-</html>
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+});
+</script>

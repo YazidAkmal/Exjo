@@ -109,7 +109,7 @@ include 'header.php';
                             <img src="img/assets/yk/ykCover.jpg" alt="">
                         </div>
                         <div class="content">
-                            <p class="d-flex align-items-center">Yogyakarta <a href="travel_destination.php">  5 Wisata</a> </p>
+                            <p class="d-flex align-items-center">Yogyakarta <a href="travel_destination.php?daerah=Yogyakarta">  6 Wisata</a> </p>
                             
                         </div>
                     </div>
@@ -120,7 +120,7 @@ include 'header.php';
                             <img src="img/assets/sl/slCover.jpg" alt="">
                         </div>
                         <div class="content">
-                            <p class="d-flex align-items-center">Sleman <a href="travel_destination.php">  5 Wisata</a> </p>
+                            <p class="d-flex align-items-center">Sleman <a href="travel_destination.php?daerah=Sleman">  5 Wisata</a> </p>
                             
                         </div>
                     </div>
@@ -131,7 +131,7 @@ include 'header.php';
                             <img src="img/assets/ba/baCover.jpg" alt="">
                         </div>
                         <div class="content">
-                            <p class="d-flex align-items-center">Bantul <a href="travel_destination.php">  5 Wisata</a> </p>
+                            <p class="d-flex align-items-center">Bantul <a href="travel_destination.php?daerah=Bantul">  5 Wisata</a> </p>
                             
                         </div>
                     </div>
@@ -142,7 +142,7 @@ include 'header.php';
                             <img src="img/assets/gk/gkCover.jpg" alt="">
                         </div>
                         <div class="content">
-                            <p class="d-flex align-items-center">Gunung Kidul <a href="travel_destination.php">  5 Wisata</a> </p>
+                            <p class="d-flex align-items-center">Gunung Kidul <a href="travel_destination.php?daerah=Gunung Kidul">  5 Wisata</a> </p>
                             
                         </div>
                     </div>
@@ -153,7 +153,7 @@ include 'header.php';
                             <img src="img/assets/kp/kpCover.jpg" alt="">
                         </div>
                         <div class="content">
-                            <p class="d-flex align-items-center">Kulon Progo <a href="travel_destination.php">  5 Wisata</a> </p>
+                            <p class="d-flex align-items-center">Kulon Progo <a href="travel_destination.php?daerah=Kulon Progo">  5 Wisata</a> </p>
                             
                         </div>
                     </div>

@@ -1,4 +1,16 @@
 <?php 
+include 'init.php';
+include 'database.php';
+
+$result_perjalanan = $main_conn->query("SELECT COUNT(*) as total FROM bookings");
+$total_perjalanan = $result_perjalanan->fetch_assoc()['total'];
+
+$result_destinasi = $main_conn->query("SELECT COUNT(*) as total FROM destinations");
+$total_destinasi = $result_destinasi->fetch_assoc()['total'];
+
+$result_ulasan = $main_conn->query("SELECT COUNT(*) as total FROM reviews WHERE rating >= 4");
+$ulasan_positif = $result_ulasan->fetch_assoc()['total'];
+
 include 'header.php'; 
 ?>
 <!doctype html>
@@ -64,42 +76,31 @@ include 'header.php';
                             <div class="story_info">
                                 <div class="row">
                                     <div class="col-lg-9">
-                                        <p>Consulting represents success at realizing the company is going in the wrong direction. The only time the company fails is when it is not possible to do a turnaround anymore. We help companies pivot into more profitable directions where they can expand and grow. It is inevitable that companies will end up making a few mistakes; we help them correct these mistakes.</p>
-                                        <p>Consulting represents success at realizing the company is going in the wrong direction. The only time the company fails is when it is not possible to do a turnaround anymore. We help companies pivot into more profitable directions where they can expand and grow. It is inevitable that companies will end up making a few mistakes; we help them correct these mistakes.</p>
+                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel error blanditiis cupiditate quam adipisci perspiciatis magni, soluta reprehenderit architecto accusamus, eligendi facere iure illo ipsum, repellendus nostrum tempore. Temporibus, dolore!</p>
+                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem suscipit reprehenderit illum et illo, corporis soluta tenetur ea officia praesentium. Aperiam laudantium, earum totam illum et iusto fugit quas necessitatibus?</p>
+                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora inventore impedit delectus cum doloremque esse, mollitia illo repudiandae sit molestiae quidem exercitationem nemo ipsum dolorum aut voluptates dolorem. Iure, amet!</p>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A dicta est illum totam nihil, necessitatibus commodi cum quos error earum fugit asperiores facilis ratione adipisci inventore placeat, non ipsum consequatur.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="story_thumb ">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-5 col-md-6 justify-content-center">
-                                        <div class="thumb padd_1">
-                                            <img src="img/about/1.jpg" alt="">
-                                        </div>
-                                    </div> 
-                                    <div class="col-lg-6 col-md-6 justify-content-center">
-                                        <div class="thumb padd_2">
-                                            <img src="img/about/2.jpg" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="counter_wrap justify-content-center">
                                 <div class="row justify-content-center">
                                     <div class="col-lg-4 col-md-4 justify-content-center">
                                         <div class="single_counter text-center">
-                                            <h3  class="counter">197</h3>
-                                            <p>Perjalanan</p>
+                                            <h3  class="counter"> <?php echo $total_perjalanan; ?> </h3>
+                                            <p>Total Perjalanan</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-4 justify-content-center">
                                         <div class="single_counter text-center">
-                                            <h3 class="counter">23</h3>
-                                            <p>Rata-rata pemesanan per bulan</p>
+                                            <h3 class="counter"> <?php echo $total_destinasi; ?> </h3>
+                                            <p>Total Destinasi</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-4 justify-content-center">
                                         <div class="single_counter text-center">
-                                            <h3 class="counter">192</h3>
+                                            <h3 class="counter"> <?php echo $ulasan_positif; ?> </h3>
                                             <p>Ulasan Positif</p>
                                         </div>
                                     </div>
@@ -132,7 +133,7 @@ include 'header.php';
                             <div class="place_info">
                                 <a href=""><h3>Yazid Akmal Adyatma</h3></a>
                                 <h5>23.11.5845</h5>
-                                <p>Project Leader, FullStack Dev</p>                           
+                                <p>Project Leader, Frontend</p>                           
                             </div>
                         </div>
                     </div>
@@ -218,18 +219,7 @@ include 'header.php';
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/isotope.pkgd.min.js"></script>
     <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/scrollIt.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
-    <script src="js/jquery.slicknav.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/gijgo.min.js"></script>
-    <script src="js/slick.min.js"></script>
+   
    
 
     
