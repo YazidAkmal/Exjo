@@ -13,7 +13,6 @@ $stmt_user->execute();
 $user_data = $stmt_user->get_result()->fetch_assoc();
 $stmt_user->close();
 
-// Ambil semua lokasi
 $locations = [];
 $loc_result = $main_conn->query("SELECT DISTINCT location FROM destinations ORDER BY location");
 while ($row = $loc_result->fetch_assoc()) {
@@ -49,12 +48,15 @@ include 'header.php';
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
-                                <input class="form-control" type="text" value="Nama: <?= htmlspecialchars($user_data['first_name'] . ' ' . $user_data['last_name'] ?? '') ?>" readonly>
+                                <input class="form-control" type="text"
+                                    value="Nama: <?= htmlspecialchars($user_data['first_name'] . ' ' . $user_data['last_name'] ?? '') ?>"
+                                    readonly>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
-                                <input class="form-control" type="email" value="Email: <?= htmlspecialchars($user_data['email'] ?? '') ?>" readonly>
+                                <input class="form-control" type="email"
+                                    value="Email: <?= htmlspecialchars($user_data['email'] ?? '') ?>" readonly>
                             </div>
                         </div>
 
@@ -79,19 +81,23 @@ include 'header.php';
 
                         <div class="col-md-12 mb-3">
                             <div class="form-group">
-                                <input type="text" name="tanggal_pemesanan" id="tanggal-flatpickr" class="form-control" placeholder="Pilih Tanggal Pemesanan" required>
+                                <input type="text" name="tanggal_pemesanan" id="tanggal-flatpickr" class="form-control"
+                                    placeholder="Pilih Tanggal Pemesanan" required>
                             </div>
                         </div>
 
                         <div class="col-12 mb-3">
                             <div class="form-group">
-                                <textarea name="catatan" class="form-control" rows="4" placeholder="Catatan Tambahan (opsional)"></textarea>
+                                <textarea name="catatan" class="form-control" rows="4"
+                                    placeholder="Catatan Tambahan (opsional)"></textarea>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group mt-3 text-center">
                         <button type="submit" class="button button-contactForm boxed-btn">Kirim Reservasi</button>
+                        <p class="text-center mt-2 text-muted"><small>Setelah menekan tombol, Anda akan diarahkan ke
+                                WhatsApp untuk konfirmasi pesanan dengan admin.</small></p>
                     </div>
                 </form>
             </div>
@@ -107,59 +113,59 @@ include 'header.php';
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
-$(document).ready(function () {
+    $(document).ready(function () {
 
-    $('select').niceSelect();
+        $('select').niceSelect();
 
-    flatpickr("#tanggal-flatpickr", {
-        dateFormat: "Y-m-d",
-        minDate: "today"
-    });
-
-    $('#lokasi').on('change', function () {
-        let lokasiVal = $(this).val();
-        let destinasi = $('#destinasi');
-
-        if (lokasiVal) {
-            destinasi.html('<option value="">Memuat...</option>');
-            $.post('get_destinations.php', { location: lokasiVal }, function (data) {
-                destinasi.html(data);
-                destinasi.niceSelect('destroy');
-                destinasi.niceSelect();
-            });
-        } else {
-            destinasi.html('<option value="">Pilih Lokasi Dahulu</option>');
-            destinasi.niceSelect('destroy');
-            destinasi.niceSelect();
-        }
-    });
-
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('status')) {
-        const status = urlParams.get('status');
-        const error = urlParams.get('error');
-        const brandColor = '#1EC6B6';
-
-        let title, text, icon;
-
-        if (status === 'sukses') {
-            title = 'Berhasil!';
-            text = 'Terima kasih, reservasi Anda telah kami terima.';
-            icon = 'success';
-        } else {
-            title = 'Gagal';
-            text = error || 'Terjadi kesalahan saat mengirim data.';
-            icon = 'error';
-        }
-
-        Swal.fire({
-            icon: icon,
-            title: title,
-            text: text,
-            confirmButtonColor: brandColor
+        flatpickr("#tanggal-flatpickr", {
+            dateFormat: "Y-m-d",
+            minDate: "today"
         });
 
-        window.history.replaceState({}, document.title, window.location.pathname);
-    }
-});
+        $('#lokasi').on('change', function () {
+            let lokasiVal = $(this).val();
+            let destinasi = $('#destinasi');
+
+            if (lokasiVal) {
+                destinasi.html('<option value="">Memuat...</option>');
+                $.post('get_destinations.php', { location: lokasiVal }, function (data) {
+                    destinasi.html(data);
+                    destinasi.niceSelect('destroy');
+                    destinasi.niceSelect();
+                });
+            } else {
+                destinasi.html('<option value="">Pilih Lokasi Dahulu</option>');
+                destinasi.niceSelect('destroy');
+                destinasi.niceSelect();
+            }
+        });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('status')) {
+            const status = urlParams.get('status');
+            const error = urlParams.get('error');
+            const brandColor = '#1EC6B6';
+
+            let title, text, icon;
+
+            if (status === 'sukses') {
+                title = 'Berhasil!';
+                text = 'Terima kasih, reservasi Anda telah kami terima.';
+                icon = 'success';
+            } else {
+                title = 'Gagal';
+                text = error || 'Terjadi kesalahan saat mengirim data.';
+                icon = 'error';
+            }
+
+            Swal.fire({
+                icon: icon,
+                title: title,
+                text: text,
+                confirmButtonColor: brandColor
+            });
+
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    });
 </script>

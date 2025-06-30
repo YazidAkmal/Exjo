@@ -54,16 +54,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $new_destination_id = $main_conn->insert_id;
         $stmt_dest->close();
 
-        // --- Proses Gambar Galeri ---
         if (isset($_FILES['gallery_images']) && !empty($_FILES['gallery_images']['name'][0])) {
             $gallery_files = $_FILES['gallery_images'];
-            $file_counter = 1; // Mulai penomoran file dari 1
+            $file_counter = 1;
 
             for ($i = 0; $i < count($gallery_files['name']); $i++) {
                 if ($gallery_files['error'][$i] === UPLOAD_ERR_OK) {
                     $gallery_tmp_name = $gallery_files['tmp_name'][$i];
                     $gallery_extension = strtolower(pathinfo($gallery_files['name'][$i], PATHINFO_EXTENSION));
-                    // Buat nama file baru: 1.jpg, 2.png, dst.
                     $gallery_new_name = $file_counter . '.' . $gallery_extension;
                     $gallery_path = $dynamic_upload_dir . $gallery_new_name;
                     
