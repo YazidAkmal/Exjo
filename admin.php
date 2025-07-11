@@ -7,8 +7,8 @@ if (!isset($_SESSION['admin_username'])) {
 
 include 'database.php';
 $admin_db_host = 'localhost';
-$admin_db_user = 'root';
-$admin_db_pass = '';
+$admin_db_user = 'exjo';
+$admin_db_pass = '123';
 $admin_db_name = 'exjo_admin_db';
 $admin_conn = new mysqli($admin_db_host, $admin_db_user, $admin_db_pass, $admin_db_name);
 if ($admin_conn->connect_error) {
