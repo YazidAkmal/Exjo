@@ -15,8 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['destination_id']) && 
         'Gunung Kidul' => 'gk',
         'Kulon Progo' => 'kp'
     ];
-    
-    $destination_id = (int)$_POST['destination_id'];
+
+    $destination_id = (int) $_POST['destination_id'];
 
     try {
         $info_stmt = $main_conn->prepare("SELECT name, location FROM destinations WHERE id = ?");
@@ -44,12 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['destination_id']) && 
             $existing_files = glob($dynamic_upload_dir . '*.*');
             $last_num = 0;
             foreach ($existing_files as $file) {
-                $num = (int)basename($file, '.' . pathinfo($file, PATHINFO_EXTENSION));
+                $num = (int) basename($file, '.' . pathinfo($file, PATHINFO_EXTENSION));
                 if ($num > $last_num) {
                     $last_num = $num;
                 }
             }
             $file_counter = $last_num + 1;
+
+            $upload_count = 0;
 
             for ($i = 0; $i < count($gallery_files['name']); $i++) {
                 if ($gallery_files['error'][$i] === UPLOAD_ERR_OK) {
@@ -57,27 +59,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['destination_id']) && 
                     $gallery_extension = strtolower(pathinfo($gallery_files['name'][$i], PATHINFO_EXTENSION));
                     $gallery_new_name = $file_counter . '.' . $gallery_extension;
                     $gallery_path = $dynamic_upload_dir . $gallery_new_name;
-                    
+
                     if (move_uploaded_file($gallery_tmp_name, $gallery_path)) {
                         $stmt = $main_conn->prepare("INSERT INTO detail_image (path, destinations_id) VALUES (?, ?)");
                         $stmt->bind_param("si", $gallery_path, $destination_id);
                         $stmt->execute();
                         $stmt->close();
                         $file_counter++;
+
+                        $upload_count++;
                     }
                 }
             }
-            header("Location: upload_gallery.php?status=sukses");
+            header("Location: admin.php?status=upload_sukses&count=" . $upload_count . "#unggah-galeri");
             exit();
         } else {
             throw new Exception("Pilih setidaknya satu gambar.");
         }
     } catch (Exception $e) {
-        header("Location: upload_gallery.php?status=gagal&error=" . urlencode($e->getMessage()));
+        header("Location: admin.php?status=upload_gagal&error=" . urlencode($e->getMessage()) . "#unggah-galeri");
         exit();
     }
 } else {
-    header("Location: upload_gallery.php?status=gagal&error=Pilih destinasi.");
+    header("Location: admin.php#unggah-galeri");
     exit();
 }
 ?>

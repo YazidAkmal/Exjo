@@ -1,71 +1,103 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login - EXJO</title>
+    <link rel="shortcut icon" type="image/x-icon" href="img/assets/carousel/exjo.ico">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
         body {
             background-color: #f4f5f7;
         }
+
         .login-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            padding: 20px 0;
         }
+
         .login-form {
             background: #fff;
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 450px;
         }
+
         .login-form .logo {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .login-form .logo img {
             max-width: 150px;
         }
+
         .login-form h3 {
             text-align: center;
             margin-bottom: 30px;
             color: #040E27;
         }
+
         .form-control {
             height: 50px;
             border-radius: 5px;
         }
+
         .boxed-btn3 {
             width: 100%;
             text-transform: uppercase;
         }
+
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-wrapper .form-control {
+            padding-right: 45px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888;
+            display: none;
+        }
+
+        input::-ms-reveal,
+        input::-webkit-password-reveal {
+            display: none;
+        }
     </style>
 </head>
+
 <body>
     <div class="login-container">
         <div class="login-form">
             <div class="logo">
-                <img src="img/logo.png" alt="EXJO Logo">
+                <a href="index.php"><img src="img/logo.png" class="img-fluid" alt="EXJO Logo"></a>
             </div>
             <h3>Login Akun</h3>
-            
-            <?php
-                if (isset($_GET['error'])) {
-                    echo '<div class="alert alert-danger">' . htmlspecialchars($_GET['error']) . '</div>';
-                }
-                
-            ?>
             <form action="login_process.php" method="POST">
                 <div class="form-group mb-3">
-                    <input type="text" name="username_email" class="form-control" placeholder="Username (untuk Admin) / Email (untuk Pengguna)" required>
+                    <input type="text" name="username_email" class="form-control"
+                        placeholder="Username (Admin) / Email (Pengguna)" required>
                 </div>
-                <div class="form-group mb-4">
+                <div class="form-group mb-4 password-wrapper">
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    <i class="fa fa-eye-slash toggle-password"></i>
                 </div>
                 <button type="submit" class="boxed-btn3">Login</button>
             </form>
@@ -75,45 +107,56 @@
             </div>
         </div>
     </div>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script> 
+
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        $(document).ready(function() {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    if (urlParams.has('status')) {
-        const status = urlParams.get('status');
-        const error = urlParams.get('error'); 
-        const brandColor = '#1EC6B6';
-
-        let title, text, icon;
-
-        if (status === 'sukses') {
-            title = 'Berhasil!';
-            text = 'Aksi Anda telah berhasil diproses.'; 
-            icon = 'success';
-        } else { 
-            title = 'Oops... Terjadi Kesalahan';
-            text = error || 'Silakan periksa kembali isian Anda dan coba lagi.'; 
-            icon = 'error';
-        }
-
-        if (window.location.pathname.includes('reservasi.php') && status === 'sukses') {
-            text = 'Terima kasih, reservasi Anda telah kami terima dan akan segera diproses.';
-        }
-
-        Swal.fire({
-            icon: icon,
-            title: title,
-            text: text,
-            confirmButtonColor: brandColor 
+        $(document).ready(function () {
+            $('.toggle-password').css('display', 'block');
+            $('.toggle-password').on('click', function () {
+                $(this).toggleClass("fa-eye fa-eye-slash");
+                var input = $(this).siblings("input");
+                if (input.attr("type") === "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
         });
-
-        window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
-    }
-});
     </script>
-    
+
+    <?php
+    if (isset($_SESSION['alert'])) {
+        $alert = $_SESSION['alert'];
+
+        if ($alert['type'] === 'error') {
+            echo "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Gagal',
+                text: '{$alert['message']}'
+            });
+        </script>";
+        }
+
+        elseif ($alert['type'] === 'success') {
+            echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Registrasi Berhasil',
+                text: '{$alert['message']}',
+                timer: 3000,
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end'
+            });
+        </script>";
+        }
+
+        unset($_SESSION['alert']);
+    }
+    ?>
 </body>
+
 </html>

@@ -49,8 +49,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $stmt_dest = $main_conn->prepare("INSERT INTO destinations (name, location, description, price, image_path, package_type, link) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt_dest->bind_param("sssdsss", $name, $location, $description, $price, $image_path_for_db, $package_type, $link);
-        if (!$stmt_dest->execute()) throw new Exception("Gagal menyimpan destinasi.");
-        
+        if (!$stmt_dest->execute())
+            throw new Exception("Gagal menyimpan destinasi.");
+
         $new_destination_id = $main_conn->insert_id;
         $stmt_dest->close();
 
@@ -64,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $gallery_extension = strtolower(pathinfo($gallery_files['name'][$i], PATHINFO_EXTENSION));
                     $gallery_new_name = $file_counter . '.' . $gallery_extension;
                     $gallery_path = $dynamic_upload_dir . $gallery_new_name;
-                    
+
                     if (move_uploaded_file($gallery_tmp_name, $gallery_path)) {
                         $stmt_gallery = $main_conn->prepare("INSERT INTO detail_image (path, destinations_id) VALUES (?, ?)");
                         $stmt_gallery->bind_param("si", $gallery_path, $new_destination_id);
@@ -77,15 +78,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $main_conn->commit();
-        header("Location: admin.php?status_tambah=sukses#tambah-destinasi");
+        header("Location: admin.php?status=tambah_sukses&context=Destinasi Baru#tambah-destinasi");
         exit();
 
     } catch (Exception $e) {
         $main_conn->rollback();
-        header("Location: admin.php?status_tambah=gagal&error=" . urlencode($e->getMessage()) . "#tambah-destinasi");
+        header("Location: admin.php?status=tambah_gagal&error=" . urlencode($e->getMessage()) . "#tambah-destinasi");
         exit();
     }
-    } else {
+} else {
     header("Location: admin.php");
     exit();
 }

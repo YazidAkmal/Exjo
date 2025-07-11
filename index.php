@@ -1,6 +1,6 @@
 <?php
 include 'init.php';
-include 'header.php'; 
+include 'header.php';
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -28,7 +28,8 @@ include 'header.php';
                             <div class="slider_text text-center">
                                 <h3>Yogyakarta</h3>
                                 <p>Kota nyaman, ramah, dan berbudaya</p>
-                                <a href="travel_destination.php?daerah=Yogyakarta" class="boxed-btn3">Jelajahi Sekarang!</a>
+                                <a href="travel_destination.php?daerah=Yogyakarta" class="boxed-btn3">Jelajahi
+                                    Sekarang!</a>
                             </div>
                         </div>
                     </div>
@@ -67,7 +68,8 @@ include 'header.php';
                             <div class="slider_text text-center">
                                 <h3>Gunung Kidul</h3>
                                 <p>Surga pantai eksotis dan gua menawan</p>
-                                <a href="travel_destination.php?daerah=Gunung Kidul" class="boxed-btn3">Jelajahi Sekarang!</a>
+                                <a href="travel_destination.php?daerah=Gunung Kidul" class="boxed-btn3">Jelajahi
+                                    Sekarang!</a>
                             </div>
                         </div>
                     </div>
@@ -80,7 +82,8 @@ include 'header.php';
                             <div class="slider_text text-center">
                                 <h3>Kulon Progo</h3>
                                 <p>Tenang, asri, surga alam tersembunyi</p>
-                                <a href="travel_destination.php?daerah=Kulon Progo" class="boxed-btn3">Jelajahi Sekarang!</a>
+                                <a href="travel_destination.php?daerah=Kulon Progo" class="boxed-btn3">Jelajahi
+                                    Sekarang!</a>
                             </div>
                         </div>
                     </div>
@@ -90,7 +93,7 @@ include 'header.php';
 
     </div>
     <!-- slider_area_end -->
-    
+
     <!-- popular_destination_area_start  -->
     <div class="popular_destination_area">
         <div class="container">
@@ -98,63 +101,69 @@ include 'header.php';
                 <div class="col-lg-6">
                     <div class="section_title text-center mb_70">
                         <h3>Destinasi Favorit</h3>
-                        <p>Jelajahi tempat-tempat terbaik yang jadi favorit banyak orang, siap menginspirasi perjalanan Anda.</p>
+                        <p>Jelajahi tempat-tempat terbaik yang jadi favorit banyak orang, siap menginspirasi perjalanan
+                            Anda.</p>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
                     <div class="single_destination">
                         <div class="thumb">
-                            <img src="img/assets/yk/ykCover.jpg" alt="">
+                            <img src="img/assets/yk/ykCover.jpg" class="img-fluid"
+                                alt="travel_destination.php?daerah=Yogyakarta">
                         </div>
                         <div class="content">
-                            <p class="d-flex align-items-center">Yogyakarta <a href="travel_destination.php?daerah=Yogyakarta">  6 Wisata</a> </p>
-                            
+                            <p class="d-flex align-items-center">Yogyakarta <a
+                                    href="travel_destination.php?daerah=Yogyakarta"> 6 Wisata</a> </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
                     <div class="single_destination">
                         <div class="thumb">
-                            <img src="img/assets/sl/slCover.jpg" alt="">
+                            <img src="img/assets/sl/slCover.jpg" class="img-fluid"
+                                alt="travel_destination.php?daerah=Sleman">
                         </div>
                         <div class="content">
-                            <p class="d-flex align-items-center">Sleman <a href="travel_destination.php?daerah=Sleman">  5 Wisata</a> </p>
-                            
+                            <p class="d-flex align-items-center">Sleman <a href="travel_destination.php?daerah=Sleman">
+                                    5 Wisata</a> </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
                     <div class="single_destination">
                         <div class="thumb">
-                            <img src="img/assets/ba/baCover.jpg" alt="">
+                            <img src="img/assets/ba/baCover.jpg" class="img-fluid"
+                                alt="travel_destination.php?daerah=Bantul">
                         </div>
                         <div class="content">
-                            <p class="d-flex align-items-center">Bantul <a href="travel_destination.php?daerah=Bantul">  5 Wisata</a> </p>
-                            
+                            <p class="d-flex align-items-center">Bantul <a href="travel_destination.php?daerah=Bantul">
+                                    5 Wisata</a> </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
                     <div class="single_destination">
                         <div class="thumb">
-                            <img src="img/assets/gk/gkCover.jpg" alt="">
+                            <img src="img/assets/gk/gkCover.jpg" class="img-fluid"
+                                alt="travel_destination.php?daerah=Gunung Kidul">
                         </div>
                         <div class="content">
-                            <p class="d-flex align-items-center">Gunung Kidul <a href="travel_destination.php?daerah=Gunung Kidul">  5 Wisata</a> </p>
-                            
+                            <p class="d-flex align-items-center">Gunung Kidul <a
+                                    href="travel_destination.php?daerah=Gunung Kidul"> 5 Wisata</a> </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
                     <div class="single_destination">
                         <div class="thumb">
-                            <img src="img/assets/kp/kpCover.jpg" alt="">
+                            <img src="img/assets/kp/kpCover.jpg" class="img-fluid"
+                                alt="travel_destination.php?daerah=Kulon Progo">
                         </div>
                         <div class="content">
-                            <p class="d-flex align-items-center">Kulon Progo <a href="travel_destination.php?daerah=Kulon Progo">  5 Wisata</a> </p>
-                            
+                            <p class="d-flex align-items-center">Kulon Progo <a
+                                    href="travel_destination.php?daerah=Kulon Progo"> 5 Wisata</a> </p>
                         </div>
                     </div>
                 </div>
@@ -169,8 +178,9 @@ include 'header.php';
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section_title text-center mb_70">
-                        <h3>Popular Places</h3>
-                        <p>Nikmati berbagai destinasi yang menjadi favorit, masing-masing menawarkan pesona yang memanjakan mata anda.</p>
+                        <h3>Tempat Populer</h3>
+                        <p>Nikmati berbagai destinasi yang menjadi favorit, masing-masing menawarkan pesona yang
+                            memanjakan mata anda.</p>
                     </div>
                 </div>
             </div>
@@ -178,20 +188,23 @@ include 'header.php';
                 <div class="col-lg-4 col-md-6">
                     <div class="single_place">
                         <div class="thumb">
-                            <img src="img/assets/yk/gembiraloka/cover.jpg" alt="">
+                            <img src="img/assets/yk/gembiraloka/cover.jpg" class="img-fluid"
+                                alt="">
                             <a href="" class="prise">Rp60.000</a>
                         </div>
                         <div class="place_info">
-                            <a href=""><h3>Kebun Binatang Gembira Loka</h3></a>
+                            <a href="travel_destination.php?daerah=Yogyakarta">
+                                <h3>Kebun Binatang Gembira Loka</h3>
+                            </a>
                             <p>Yogyakarta</p>
                             <div class="rating_days d-flex justify-content-between">
                                 <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">(20 Ulasan)</a>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <a href="#">(20 Ulasan)</a>
                                 </span>
                                 <div class="days">
                                     <i class="fa fa-clock-o"></i>
@@ -204,20 +217,23 @@ include 'header.php';
                 <div class="col-lg-4 col-md-6">
                     <div class="single_place">
                         <div class="thumb">
-                            <img src="img/assets/gk/hehaocean/cover.jpeg" alt="">
+                            <img src="img/assets/gk/hehaoceanview/cover.jpeg" class="img-fluid"
+                                alt="">
                             <a href="" class="prise">Rp25.000</a>
                         </div>
                         <div class="place_info">
-                            <a href=""><h3>HeHa Ocean View</h3></a>
+                            <a href="travel_destination.php?daerah=Gunung Kidul">
+                                <h3>HeHa Ocean View</h3>
+                            </a>
                             <p>Gunung Kidul</p>
                             <div class="rating_days d-flex justify-content-between">
                                 <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">(19 Ulasan)</a>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <a href="#">(19 Ulasan)</a>
                                 </span>
                                 <div class="days">
                                     <i class="fa fa-clock-o"></i>
@@ -230,20 +246,23 @@ include 'header.php';
                 <div class="col-lg-4 col-md-6">
                     <div class="single_place">
                         <div class="thumb">
-                            <img src="img/assets/sl/ullensentanu/cover.jpg" alt="">
+                            <img src="img/assets/sl/ullensentanu/cover.jpg" class="img-fluid"
+                                alt="">
                             <a href="#" class="prise">Rp50.000</a>
                         </div>
                         <div class="place_info">
-                            <a href=""><h3>Museum Ullen Sentalu</h3></a>
+                            <a href="travel_destination.php?daerah=Sleman">
+                                <h3>Museum Ullen Sentalu</h3>
+                            </a>
                             <p>Sleman</p>
                             <div class="rating_days d-flex justify-content-between">
                                 <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">(15 Ulasan)</a>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <a href="#">(15 Ulasan)</a>
                                 </span>
                                 <div class="days">
                                     <i class="fa fa-clock-o"></i>
@@ -256,20 +275,23 @@ include 'header.php';
                 <div class="col-lg-4 col-md-6">
                     <div class="single_place">
                         <div class="thumb">
-                            <img src="img/assets/kp/glagah/cover.jpg" alt="">
+                            <img src="img/assets/kp/pantaiglagahindah/cover.jpg" class="img-fluid"
+                                alt="">
                             <a href="#" class="prise">Rp10.000</a>
                         </div>
                         <div class="place_info">
-                            <a href=""><h3>Pantai Glagah Indah</h3></a>
+                            <a href="travel_destination.php?daerah=Kulon Progo">
+                                <h3>Pantai Glagah Indah</h3>
+                            </a>
                             <p>Kulon Progo</p>
                             <div class="rating_days d-flex justify-content-between">
                                 <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">(26 Ulasan)</a>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <a href="#">(26 Ulasan)</a>
                                 </span>
                                 <div class="days">
                                     <i class="fa fa-clock-o"></i>
@@ -282,20 +304,23 @@ include 'header.php';
                 <div class="col-lg-4 col-md-6">
                     <div class="single_place">
                         <div class="thumb">
-                            <img src="img/assets/ba/lembahoyo/cover.jpg" alt="">
+                            <img src="img/assets/ba/lembahoyo/cover.jpg" class="img-fluid"
+                                alt="">
                             <a href="#" class="prise">Rp10.000</a>
                         </div>
                         <div class="place_info">
-                            <a href=""><h3>Lembah Oyo</h3></a>
+                            <a href="travel_destination.php?daerah=Bantul">
+                                <h3>Lembah Oyo</h3>
+                            </a>
                             <p>Bantul</p>
                             <div class="rating_days d-flex justify-content-between">
                                 <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">(17 Ulasan)</a>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <a href="#">(17 Ulasan)</a>
                                 </span>
                                 <div class="days">
                                     <i class="fa fa-clock-o"></i>
@@ -308,20 +333,23 @@ include 'header.php';
                 <div class="col-lg-4 col-md-6">
                     <div class="single_place">
                         <div class="thumb">
-                            <img src="img/assets/ba/goacerme/cover.jpg" alt="">
+                            <img src="img/assets/ba/goacerme/cover.jpg" class="img-fluid"
+                                alt="">
                             <a href="#" class="prise">Rp10.000</a>
                         </div>
                         <div class="place_info">
-                            <a href=""><h3>Goa Cerme</h3></a>
+                            <a href="travel_destination.php?daerah=Bantul">
+                                <h3>Goa Cerme</h3>
+                            </a>
                             <p>Bantul</p>
                             <div class="rating_days d-flex justify-content-between">
                                 <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">(20 Ulasan)</a>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <a href="#">(20 Ulasan)</a>
                                 </span>
                                 <div class="days">
                                     <i class="fa fa-clock-o"></i>
@@ -341,7 +369,7 @@ include 'header.php';
             </div>
         </div>
     </div>
-<!-- popular place end-->
+    <!-- popular place end-->
 
     <div class="travel_variation_area">
         <div class="container">
@@ -349,7 +377,7 @@ include 'header.php';
                 <div class="col-lg-4 col-md-6">
                     <div class="single_travel text-center">
                         <div class="icon">
-                            <img src="img/svg_icon/train.png" alt="">
+                            <img src="img/svg_icon/train.png" class="img-fluid" alt="">
                         </div>
                         <h3>Perjalanan Nyaman</h3>
                         <p>Memberikan anda pelayanan perjalanan dengan kendaraan terbaik.</p>
@@ -358,7 +386,7 @@ include 'header.php';
                 <div class="col-lg-4 col-md-6">
                     <div class="single_travel text-center">
                         <div class="icon">
-                            <img src="img/svg_icon/money.png" alt="">
+                            <img src="img/svg_icon/money.png" class="img-fluid" alt="">
                         </div>
                         <h3>Lebih Hemat</h3>
                         <p>Memberikan anda harga murah, dengan fasilitas lengkap.</p>
@@ -367,7 +395,7 @@ include 'header.php';
                 <div class="col-lg-4 col-md-6">
                     <div class="single_travel text-center">
                         <div class="icon">
-                            <img src="img/svg_icon/earth.png" alt="">
+                            <img src="img/svg_icon/earth.png" class="img-fluid" alt="">
                         </div>
                         <h3>Pemandu Wisata</h3>
                         <p>Memberikan anda informasi mendetail dengan pemandu wisata kami.</p>
@@ -389,7 +417,7 @@ include 'header.php';
                                 <div class="col-lg-8">
                                     <div class="single_testmonial text-center">
                                         <div class="author_thumb">
-                                            <img src="img/testmonial/kak_ros.jpg" alt="">
+                                            <img src="img/testmonial/kak_ros.jpg" class="img-fluid" alt="">
                                         </div>
                                         <p>Kerenn, wisatanya cakep-cakep kek orang yg buat website ini.</p>
                                         <div class="testmonial_author">
@@ -404,7 +432,7 @@ include 'header.php';
                                 <div class="col-lg-8">
                                     <div class="single_testmonial text-center">
                                         <div class="author_thumb">
-                                            <img src="img/testmonial/mimar.jpg" alt="">
+                                            <img src="img/testmonial/mimar.jpg" class="img-fluid" alt="">
                                         </div>
                                         <p>Cantik sekali guyss.</p>
                                         <div class="testmonial_author">
@@ -419,7 +447,7 @@ include 'header.php';
                                 <div class="col-lg-8">
                                     <div class="single_testmonial text-center">
                                         <div class="author_thumb">
-                                            <img src="img/testmonial/saeed.jpg" alt="">
+                                            <img src="img/testmonial/saeed.jpg" class="img-fluid" alt="">
                                         </div>
                                         <p>Santai santai, seruu banget guyss di Yogyakarta.</p>
                                         <div class="testmonial_author">
@@ -434,9 +462,10 @@ include 'header.php';
                                 <div class="col-lg-8">
                                     <div class="single_testmonial text-center">
                                         <div class="author_thumb">
-                                            <img src="img/testmonial/windi.jpg" alt="">
+                                            <img src="img/testmonial/windi.jpg" class="img-fluid" alt="">
                                         </div>
-                                        <p>GG Gaming guys! absen satu-satu. Ada Yogyakarta, Sleman, Bantul, GG SEMUANYAAA!!!</p>
+                                        <p>GG Gaming guys! absen satu-satu. Ada Yogyakarta, Sleman, Bantul, GG
+                                            SEMUANYAAA!!!</p>
                                         <div class="testmonial_author">
                                             <h3>- Windi Basudari</h3>
                                         </div>
@@ -450,7 +479,7 @@ include 'header.php';
         </div>
     </div>
     <!-- /testimonial_area  -->
-     
+
     <!--footer-->
     <footer class="footer">
         <div class="footer_top">
@@ -460,10 +489,11 @@ include 'header.php';
                         <div class="footer_widget">
                             <div class="footer_logo">
                                 <a href="#">
-                                    <img src="img/assets/carousel/exjoputih.png" alt="">
+                                    <img src="img/assets/carousel/exjoputih.png" class="img-fluid" alt="">
                                 </a>
                             </div>
-                            <p>Jl. Ring Road Utara, Ngringin,<br>  Condongcatur, Kec. Depok, Kab. Sleman <br> Daerah Istimewa Yogyakarta 55281 <br>
+                            <p>Jl. Ring Road Utara, Ngringin,<br> Condongcatur, Kec. Depok, Kab. Sleman <br> Daerah
+                                Istimewa Yogyakarta 55281 <br>
                                 <a href="four.html">+62 0000 1111 123</a> <br>
                                 <a href="mailto:exjoyk@gmail.com">exjoyk@gmail.com</a>
                             </p>
@@ -499,18 +529,18 @@ include 'header.php';
 
                         </div>
                     </div>
-                    
+
                     <div class="col-xl-3 col-md-6 col-lg-3">
                         <div class="footer_widget">
                             <h3 class="footer_title">
                                 Destinasi Hits
                             </h3>
                             <ul class="links double_links">
-                            <li><a href="travel_destination.php?daerah=Yogyakarta">Yogyakarta</a></li>
-                            <li><a href="travel_destination.php?daerah=Sleman">Sleman</a></li>
-                            <li><a href="travel_destination.php?daerah=Kulon Progo">Kulon Progo</a></li>
-                            <li><a href="travel_destination.php?daerah=Bantul">Bantul</a></li>
-                            <li><a href="travel_destination.php?daerah=Gunung Kidul">Gunung Kidul</a></li>
+                                <li><a href="travel_destination.php?daerah=Yogyakarta">Yogyakarta</a></li>
+                                <li><a href="travel_destination.php?daerah=Sleman">Sleman</a></li>
+                                <li><a href="travel_destination.php?daerah=Kulon Progo">Kulon Progo</a></li>
+                                <li><a href="travel_destination.php?daerah=Bantul">Bantul</a></li>
+                                <li><a href="travel_destination.php?daerah=Gunung Kidul">Gunung Kidul</a></li>
                             </ul>
                         </div>
                     </div>
@@ -522,35 +552,40 @@ include 'header.php';
                             <div class="instagram_feed">
                                 <div class="single_insta">
                                     <a href="img/assets/yk/ykCover.jpg" class="image-link" title="Tugu Yogyakarta">
-                                        <img src="img/assets/yk/ykCover.jpg" alt="Tugu Yogyakarta">
+                                        <img src="img/assets/yk/ykCover.jpg" class="img-fluid" alt="Tugu Yogyakarta">
                                     </a>
                                 </div>
                                 <div class="single_insta">
                                     <a href="img/assets/sl/slCover.jpg" class="image-link" title="Candi Prambanan">
-                                        <img src="img/assets/sl/slCover.jpg" alt="Candi Prambanan">
+                                        <img src="img/assets/sl/slCover.jpg" class="img-fluid" alt="Candi Prambanan">
                                     </a>
                                 </div>
                                 <div class="single_insta">
-                                    <a href="img/assets/ba/baCover.jpg" class="image-link" title="Jembatan Gantung Bantul">
-                                        <img src="img/assets/ba/baCover.jpg" alt="Jembatan Gantung Bantul">
+                                    <a href="img/assets/ba/baCover.jpg" class="image-link"
+                                        title="Jembatan Gantung Bantul">
+                                        <img src="img/assets/ba/baCover.jpg" class="img-fluid"
+                                            alt="Jembatan Gantung Bantul">
                                     </a>
                                 </div>
                                 <div class="single_insta">
                                     <a href="img/assets/gk/gkCover.jpg" class="image-link" title="Pantai Gunung Kidul">
-                                        <img src="img/assets/gk/gkCover.jpg" alt="Pantai Gunung Kidul">
+                                        <img src="img/assets/gk/gkCover.jpg" class="img-fluid"
+                                            alt="Pantai Gunung Kidul">
                                     </a>
                                 </div>
                                 <div class="single_insta">
-                                    <a href="img/assets/kp/kpCover.jpg" class="image-link" title="Perbukitan Kulon Progo">
-                                        <img src="img/assets/kp/kpCover.jpg" alt="Perbukitan Kulon Progo">
+                                    <a href="img/assets/kp/kpCover.jpg" class="image-link"
+                                        title="Perbukitan Kulon Progo">
+                                        <img src="img/assets/kp/kpCover.jpg" class="img-fluid"
+                                            alt="Perbukitan Kulon Progo">
                                     </a>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <div class="copy-right_text">
             <div class="container">
@@ -559,8 +594,10 @@ include 'header.php';
                     <div class="col-xl-12">
                         <p class="copy_right text-center">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>EXJO</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> <a>Universitas Amikom
+                                Yogyakarta</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
                 </div>
@@ -569,7 +606,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>EX
     </footer>
 
 
-  <!-- Modal 
+    <!-- Modal 
   <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -582,7 +619,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>EX
   </div>
 -->
     <!-- link that opens popup -->
-<!--     
+    <!--     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
 
@@ -607,9 +644,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>EX
     <script src="js/plugins.js"></script>
     <script src="js/gijgo.min.js"></script>
     <script src="js/slick.min.js"></script>
-   
 
-    
+
+
     <!--contact js-->
     <script src="js/contact.js"></script>
     <script src="js/jquery.ajaxchimp.min.js"></script>
@@ -623,21 +660,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>EX
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',
             icons: {
-             rightIcon: '<span class="fa fa-caret-down"></span>'
-         }
+                rightIcon: '<span class="fa fa-caret-down"></span>'
+            }
         });
     </script>
     <script>
-    $(document).ready(function() {
-        $('.instagram_feed').magnificPopup({
-            delegate: 'a.image-link',
-            type: 'image',
-            gallery: {
-                enabled: true 
-            }
+        $(document).ready(function () {
+            $('.instagram_feed').magnificPopup({
+                delegate: 'a.image-link',
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            });
         });
-    });
-</script>
+    </script>
 </body>
 
 </html>

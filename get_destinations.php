@@ -1,22 +1,19 @@
 <?php
+include 'init.php';
 include 'database.php';
+header('Content-Type: application/json');
 
-if (isset($_POST['location'])) {
-    $location = $_POST['location'];
-
-    $stmt = $main_conn->prepare("SELECT id, name FROM destinations WHERE location = ? ORDER BY name");
-    $stmt->bind_param("s", $location);
+if (isset($_POST['id'])) {
+    $id = (int) $_POST['id'];
+    $stmt = $main_conn->prepare("SELECT id, name, location, price, description, link, package_type FROM destinations WHERE id = ?");
+    $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        echo '<option value="">Pilih Destinasi</option>';
-        while ($row = $result->fetch_assoc()) {
-            echo '<option value="' . htmlspecialchars($row['id']) . '">' . htmlspecialchars($row['name']) . '</option>';
-        }
-    } else {
-        echo '<option value="">Tidak ada destinasi</option>';
-    }
+    $data = $result->fetch_assoc();
+    echo json_encode($data);
     $stmt->close();
+    exit();
 }
+
+$main_conn->close();
 ?>

@@ -1,35 +1,18 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
-
 include 'database.php';
 include 'header.php';
 
 $user_id = $_SESSION['user_id'];
-
-$sql = "SELECT 
-            b.id, 
-            b.booking_date, 
-            b.status, 
-            b.destination_id,
-            d.name AS destination_name 
-        FROM bookings AS b
-        JOIN destinations AS d ON b.destination_id = d.id
-        WHERE b.user_id = ? 
-        ORDER BY b.id DESC";
-
-$stmt = $main_conn->prepare($sql);
-if ($stmt === false) {
-    die("Error preparing statement: " . $main_conn->error);
-}
-
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
+$sql_bookings = "SELECT id, booking_date, num_people, total_price, status FROM bookings WHERE user_id = ? ORDER BY id DESC";
+$stmt_bookings = $main_conn->prepare($sql_bookings);
+$stmt_bookings->bind_param("i", $user_id);
+$stmt_bookings->execute();
+$bookings_result = $stmt_bookings->get_result();
 ?>
 
 <div class="bradcam_area bradcam_bg_4">
@@ -48,60 +31,119 @@ $result = $stmt->get_result();
 <div class="whole-wrap">
     <div class="container box_1170">
         <div class="section-top-border">
-
-            <?php if (isset($_GET['review_status']) && $_GET['review_status'] == 'success'): ?>
-                <div class="alert alert-success">Terima kasih! Ulasan Anda berhasil dikirim.</div>
-            <?php elseif (isset($_GET['review_status']) && $_GET['review_status'] == 'error'): ?>
-                <div class="alert alert-danger">Gagal mengirim ulasan. Silakan coba lagi.</div>
-            <?php elseif (isset($_GET['review_status']) && $_GET['review_status'] == 'exists'): ?>
-                <div class="alert alert-warning">Anda sudah pernah memberikan ulasan untuk pesanan ini.</div>
+            <?php
+            if (isset($_SESSION['message'])) {
+                echo '<div class="alert alert-info text-center">' . htmlspecialchars($_SESSION['message']) . '</div>';
+                unset($_SESSION['message']);
+            }
+            ?>
+            <?php if (isset($_GET['review_status'])): ?>
+                <div class="alert alert-<?php echo $_GET['review_status'] == 'success' ? 'success' : 'danger'; ?>"
+                    role="alert">
+                    <?php
+                    if ($_GET['review_status'] == 'success')
+                        echo 'Terima kasih! Ulasan Anda berhasil dikirim.';
+                    elseif ($_GET['review_status'] == 'exists')
+                        echo 'Anda sudah pernah memberikan ulasan untuk destinasi ini.';
+                    else
+                        echo 'Gagal mengirim ulasan. Silakan coba lagi.';
+                    ?>
+                </div>
             <?php endif; ?>
 
             <h3 class="mb-30">Riwayat Reservasi</h3>
-
             <div class="riwayat-tabel-wrapper">
                 <div class="tabel-header">
-                    <div class="kolom-destinasi">Destinasi Perjalanan</div>
-                    <div class="kolom-lain">Tanggal Pesan</div>
+                    <div class="kolom-destinasi">Destinasi & Detail Pesanan</div>
+                    <div class="kolom-lain">Tanggal</div>
                     <div class="kolom-lain">Status</div>
                     <div class="kolom-lain">Aksi</div>
                 </div>
-
                 <div class="tabel-body">
-                    <?php if ($result->num_rows > 0): ?>
-                        <?php while ($row = $result->fetch_assoc()): ?>
+                    <?php if ($bookings_result->num_rows > 0): ?>
+                        <?php while ($booking = $bookings_result->fetch_assoc()): ?>
                             <div class="tabel-baris">
-                                <div class="kolom-destinasi"><?php echo htmlspecialchars($row['destination_name']); ?></div>
-                                <div class="kolom-lain"><?php echo date('d M Y', strtotime($row['booking_date'])); ?></div>
+                                <div class="kolom-destinasi">
+                                    <ul class="list-unstyled m-0 p-0">
+                                        <?php
+                                        $sql_items = "SELECT d.name FROM booking_items bi JOIN destinations d ON bi.destination_id = d.id WHERE bi.booking_id = ?";
+                                        $stmt_items = $main_conn->prepare($sql_items);
+                                        $stmt_items->bind_param("i", $booking['id']);
+                                        $stmt_items->execute();
+                                        $items_result = $stmt_items->get_result();
+                                        while ($item = $items_result->fetch_assoc()) {
+                                            echo '<li><i class="fa fa-map-marker" style="color:#1EC6B6; margin-right: 5px;"></i>' . htmlspecialchars($item['name']) . '</li>';
+                                        }
+                                        $stmt_items->close();
+                                        ?>
+                                    </ul>
+                                    <small class="text-muted d-block mt-2">
+                                        Jumlah: <?php echo htmlspecialchars($booking['num_people']); ?> orang | Total: Rp
+                                        <?php echo number_format($booking['total_price'], 0, ',', '.'); ?>
+                                    </small>
+                                    <?php
+                                    $sql_reviews = "SELECT r.rating, r.comment, d.name as destination_name FROM reviews r JOIN destinations d ON r.destination_id = d.id WHERE r.booking_id = ?";
+                                    $stmt_reviews = $main_conn->prepare($sql_reviews);
+                                    $stmt_reviews->bind_param("i", $booking['id']);
+                                    $stmt_reviews->execute();
+                                    $reviews_result = $stmt_reviews->get_result();
+                                    if ($reviews_result->num_rows > 0) {
+                                        echo '<div class="ulasan-pengguna mt-3" style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 3px solid #1EC6B6;">';
+                                        echo '<strong style="font-size: 14px;">Ulasan Anda:</strong>';
+                                        echo '<ul class="list-unstyled ml-2 mt-2 mb-0">';
+                                        while ($review = $reviews_result->fetch_assoc()) {
+                                            echo '<li class="mb-2">';
+                                            echo '<em>' . htmlspecialchars($review['destination_name']) . '</em><br>';
+                                            for ($i = 0; $i < 5; $i++) {
+                                                echo '<i class="fa fa-star" style="color:' . ($i < $review['rating'] ? '#FFD60A' : '#e0e0e0') . '; font-size: 12px;"></i>';
+                                            }
+                                            echo '<p class="m-0" style="font-style: italic; font-size: 14px;">"' . htmlspecialchars($review['comment']) . '"</p>';
+                                            echo '</li>';
+                                        }
+                                        echo '</ul></div>';
+                                    }
+                                    $stmt_reviews->close();
+                                    ?>
+                                </div>
+                                <div class="kolom-lain"><?php echo date('d M Y', strtotime($booking['booking_date'])); ?></div>
                                 <div class="kolom-lain">
                                     <?php
-                                    $status_db = htmlspecialchars($row['status']);
+                                    $status_db = htmlspecialchars($booking['status']);
                                     $badge_class = 'secondary';
-
-                                    $status_display = $status_db;
                                     if ($status_db == 'Terima') {
-                                        $status_display = 'Diterima';
                                         $badge_class = 'success';
-                                    } elseif ($status_db == 'Tolak') {
-                                        $status_display = 'Ditolak';
+                                    } elseif ($status_db == 'Tolak' || $status_db == 'Dibatalkan') {
                                         $badge_class = 'danger';
                                     } elseif ($status_db == 'Menunggu Konfirmasi WA') {
-                                        $status_display = 'Menunggu Konfirmasi WA';
                                         $badge_class = 'warning';
                                     }
                                     ?>
-                                    <span
-                                        class="badge badge-<?php echo $badge_class; ?> p-2"><?php echo $status_display; ?></span>
+                                    <span class="badge badge-<?php echo $badge_class; ?> p-2"><?php echo $status_db; ?></span>
                                 </div>
                                 <div class="kolom-lain">
-                                    <?php if ($row['status'] == 'Terima'): ?>
+                                    <?php if ($booking['status'] == 'Terima'): ?>
+                                        <?php
+                                        $items_for_js = [];
+                                        $sql_items_js = "SELECT d.id, d.name FROM booking_items bi JOIN destinations d ON bi.destination_id = d.id WHERE bi.booking_id = ?";
+                                        $stmt_items_js = $main_conn->prepare($sql_items_js);
+                                        $stmt_items_js->bind_param("i", $booking['id']);
+                                        $stmt_items_js->execute();
+                                        $items_result_js = $stmt_items_js->get_result();
+                                        while ($item_js = $items_result_js->fetch_assoc()) {
+                                            $items_for_js[] = $item_js;
+                                        }
+                                        $stmt_items_js->close();
+                                        ?>
                                         <button class="genric-btn primary-border circle small review-btn" data-toggle="modal"
-                                            data-target="#reviewModal" data-booking-id="<?php echo $row['id']; ?>"
-                                            data-destination-id="<?php echo $row['destination_id']; ?>">
+                                            data-target="#reviewModal" data-booking-id="<?php echo $booking['id']; ?>"
+                                            data-destinations='<?php echo htmlspecialchars(json_encode($items_for_js), ENT_QUOTES, 'UTF-8'); ?>'>
                                             Beri Ulasan
                                         </button>
-                                    <?php else: ?>
-                                        -
+                                    <?php elseif ($booking['status'] == 'Menunggu Konfirmasi WA'): ?>
+                                        <a href="#" data-url="batal_reservasi.php?id=<?php echo $booking['id']; ?>"
+                                            class="genric-btn danger-border circle small cancel-btn">
+                                            Batalkan
+                                        </a>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -109,12 +151,11 @@ $result = $stmt->get_result();
                     <?php else: ?>
                         <div class="text-center p-5">
                             <p>Anda belum memiliki riwayat reservasi.</p>
-                            <a href="travel_destination.php" class="genric-btn primary">Pesan Perjalanan Sekarang</a>
+                            <a href="reservasi.php" class="genric-btn primary">Pesan Perjalanan Sekarang</a>
                         </div>
                     <?php endif; ?>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -123,17 +164,19 @@ $result = $stmt->get_result();
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="submit_review.php" method="POST">
+            <form action="submit_review.php" method="POST" id="reviewForm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="reviewModalLabel">Beri Ulasan Anda</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="reviewModalLabel">Beri Ulasan untuk Pesanan #<span
+                            id="modalBookingIdSpan"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="booking_id" id="modal_booking_id">
-                    <input type="hidden" name="destination_id" id="modal_destination_id">
-
+                    <div class="form-group">
+                        <label for="destination_id">Pilih Destinasi yang Akan Diulas</label>
+                        <select name="destination_id" id="destination_id" class="form-control wide" required></select>
+                    </div>
                     <div class="form-group">
                         <label>Rating</label>
                         <div class="rating">
@@ -165,7 +208,6 @@ $result = $stmt->get_result();
 </div>
 
 <style>
-    /* [PERBAIKAN 3: ATURAN CSS BARU UNTUK LAYOUT YANG RAPI] */
     .riwayat-tabel-wrapper {
         border: 1px solid #f0f0f0;
         border-radius: 5px;
@@ -175,8 +217,7 @@ $result = $stmt->get_result();
     .tabel-header,
     .tabel-baris {
         display: grid;
-        grid-template-columns: 2.5fr 1.5fr 1.5fr 1.5fr;
-        /* 4 kolom: Destinasi, Tanggal, Status, Aksi */
+        grid-template-columns: 3fr 1.5fr 1.5fr 1.5fr;
         width: 100%;
         align-items: center;
     }
@@ -204,13 +245,10 @@ $result = $stmt->get_result();
         text-align: left;
     }
 
-
-    /* Kode CSS untuk rating bintang tidak diubah */
     .rating {
         display: flex;
         flex-direction: row-reverse;
         justify-content: flex-start;
-        margin-left: -5px;
     }
 
     .rating>input {
@@ -219,11 +257,9 @@ $result = $stmt->get_result();
 
     .rating>label {
         position: relative;
-        width: 2em;
+        width: 1.5em;
         font-size: 2rem;
-        color: #FFD60A;
         cursor: pointer;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     }
 
     .rating>label::before {
@@ -232,33 +268,115 @@ $result = $stmt->get_result();
         font-style: normal;
         font-weight: normal;
         position: absolute;
-        opacity: 0.4;
+        color: #e0e0e0;
+        transition: color 0.2s;
     }
 
-    .rating>label:hover:before,
-    .rating>label:hover~label:before,
-    .rating>input:checked~label:before {
-        opacity: 1 !important;
+    .rating>label:hover::before,
+    .rating>label:hover~label::before,
+    .rating>input:checked~label::before {
+        color: #FFD60A;
+    }
+
+    @media (max-width: 767px) {
+        .riwayat-tabel-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tabel-header,
+        .tabel-baris {
+            min-width: 600px;
+            grid-template-columns: 200px 120px 140px 120px;
+        }
+
+        .tabel-header .kolom-destinasi,
+        .tabel-baris .kolom-destinasi {
+            width: 200px;
+        }
     }
 </style>
 
 <?php
-$stmt->close();
+$stmt_bookings->close();
 $main_conn->close();
 include 'footer.php';
 ?>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var reviewButtons = document.querySelectorAll('.review-btn');
-        reviewButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                var bookingId = this.getAttribute('data-booking-id');
-                var destinationId = this.getAttribute('data-destination-id');
+    jQuery(document).ready(function ($) {
+        if ($('#destination_id').data('niceSelect')) {
+            $('#destination_id').niceSelect('destroy');
+        }
+        $('#destination_id').niceSelect();
 
-                document.getElementById('modal_booking_id').value = bookingId;
-                document.getElementById('modal_destination_id').value = destinationId;
+        $('.review-btn').on('click', function () {
+            var bookingId = $(this).data('booking-id');
+            var destinations = $(this).data('destinations');
+            $('#modal_booking_id').val(bookingId);
+            $('#modalBookingIdSpan').text(bookingId);
+            var destinationSelect = $('#destination_id');
+            destinationSelect.empty();
+            if (destinations && destinations.length > 0) {
+                destinations.forEach(function (dest) {
+                    destinationSelect.append(new Option(dest.name, dest.id));
+                });
+            } else {
+                destinationSelect.append(new Option('Tidak ada destinasi', ''));
+            }
+            destinationSelect.niceSelect('update');
+        });
+
+        $('.cancel-btn').on('click', function (event) {
+            event.preventDefault();
+            var cancelUrl = $(this).data('url');
+            Swal.fire({
+                title: 'Anda Yakin?',
+                text: "Pesanan yang sudah dibatalkan tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, batalkan!',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = cancelUrl;
+                }
             });
         });
+
+        $('#reviewForm').on('submit', function (event) {
+            event.preventDefault();
+            var form = this;
+            if (!form.checkValidity()) {
+                Swal.fire({
+                    title: 'Form Tidak Lengkap',
+                    text: 'Harap isi semua kolom (Pilih Destinasi, beri Rating, dan tulis Komentar).',
+                    icon: 'error',
+                    confirmButtonColor: '#1EC6B6'
+                });
+                return;
+            }
+            Swal.fire({
+                title: 'Kirim Ulasan Anda?',
+                text: "Ulasan yang sudah dikirim tidak dapat diubah.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#1EC6B6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Kirim!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    HTMLFormElement.prototype.submit.call(form);
+                }
+            });
+        });
+
+        if (window.location.search.includes('review_status')) {
+            var clean_uri = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            window.history.replaceState({}, document.title, clean_uri);
+        }
     });
 </script>

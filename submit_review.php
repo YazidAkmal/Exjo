@@ -18,9 +18,9 @@ if (empty($destination_id) || empty($rating) || empty($comment)) {
     exit();
 }
 
-$check_sql = "SELECT id FROM reviews WHERE booking_id = ?";
+$check_sql = "SELECT id FROM reviews WHERE booking_id = ? AND destination_id = ?";
 $check_stmt = $main_conn->prepare($check_sql);
-$check_stmt->bind_param("i", $booking_id);
+$check_stmt->bind_param("ii", $booking_id, $destination_id);
 $check_stmt->execute();
 $check_result = $check_stmt->get_result();
 
@@ -35,7 +35,7 @@ $stmt = $main_conn->prepare($sql);
 
 if ($stmt) {
     $stmt->bind_param("iiiis", $user_id, $destination_id, $booking_id, $rating, $comment);
-    
+
     if ($stmt->execute()) {
         header("Location: my_reservations.php?review_status=success");
     } else {
@@ -48,4 +48,3 @@ if ($stmt) {
 
 $main_conn->close();
 exit();
-?>

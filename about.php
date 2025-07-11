@@ -21,7 +21,7 @@ include 'header.php';
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>EXJO</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
@@ -128,7 +128,7 @@ include 'header.php';
                     <div class="col-lg-4 col-md-6">
                         <div class="single_place">
                             <div class="thumb1">
-                                <img src="img/assets/people/fixman.png" alt="">
+                                <img src="img/assets/people/fixman.png" class="img-fluid" alt="">
                             </div>
                             <div class="place_info">
                                 <a href=""><h3>Yazid Akmal Adyatma</h3></a>
@@ -140,7 +140,7 @@ include 'header.php';
                     <div class="col-lg-4 col-md-6">
                         <div class="single_place">
                             <div class="thumb1">
-                                <img src="img/assets/people/fixman.png" alt="">                            
+                                <img src="img/assets/people/fixman.png" class="img-fluid" alt="">                            
                             </div>
                             <div class="place_info">
                                 <a href=""><h3>Muhammad Evan Alviansyah</h3></a>
@@ -152,7 +152,7 @@ include 'header.php';
                     <div class="col-lg-4 col-md-6">
                         <div class="single_place">
                             <div class="thumb1">
-                                <img src="img/assets/people/fixman.png" alt="">
+                                <img src="img/assets/people/fixman.png" class="img-fluid" alt="">
                             </div>
                             <div class="place_info">
                                 <a href=""><h3>Rafly Muhammad Fauzi</h3></a>
@@ -164,7 +164,7 @@ include 'header.php';
                     <div class="col-lg-4 col-md-6">
                         <div class="single_place">
                             <div class="thumb1">
-                                <img src="img/assets/people/fixwoman.png" alt="">
+                                <img src="img/assets/people/fixwoman.png" class="img-fluid" alt="">
                             </div>
                             <div class="place_info">
                                 <a href=""><h3>Wulandari</h3></a>
@@ -176,10 +176,10 @@ include 'header.php';
                     <div class="col-lg-4 col-md-6">
                         <div class="single_place">
                             <div class="thumb1">
-                                <img src="img/assets/people/fixman.png" alt="">
+                                <img src="img/assets/people/fixman.png" class="img-fluid" alt="">
                             </div>
                             <div class="place_info">
-                                <a href=""><h3>Galang</h3></a>
+                                <a href=""><h3>Galang P.A.P</h3></a>
                                 <h5>23.11.5825</h5>
                                 <p>Support</p>                               
                             </div>
@@ -206,8 +206,7 @@ include 'header.php';
     </div>
   </div> -->
     <!-- link that opens popup -->
-<!--     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
 
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script> -->

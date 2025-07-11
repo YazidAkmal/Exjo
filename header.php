@@ -12,7 +12,7 @@ header("Expires: 0");
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>EXJO</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="shortcut icon" type="image/x-icon" href="img/assets/carousel/exjo.ico">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -28,83 +28,92 @@ header("Expires: 0");
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
-
-   <style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" />
+    
+    <style>
         .main-header-area {
-            background: #fff !important; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            background: #fff !important;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
 
         #sticky-header.sticky {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05) !important;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
         }
 
-        .signin-btn { 
-            margin-left: 15px !important; 
-            background-color: #1EC6B6 !important; 
-            color: white !important; 
-            padding: 10px 25px !important; 
-            border-radius: 50px !important; 
-            font-weight: 500 !important; 
+        .signin-btn {
+            margin-left: 15px !important;
+            background-color: #1EC6B6 !important;
+            color: white !important;
+            padding: 10px 25px !important;
+            border-radius: 50px !important;
+            font-weight: 500 !important;
         }
-        .signin-btn:hover { background-color: #17A295 !important; }
 
-        .profile-dropdown { 
-            position: relative; 
-            display: inline-block; 
+        .signin-btn:hover {
+            background-color: #17A295 !important;
+        }
+
+        .profile-dropdown {
+            position: relative;
+            display: inline-block;
             margin-left: 20px;
         }
 
-        .profile-trigger img { 
-            width: 45px; !important;
-            height: 45px; !important;
-            border-radius: 50%; 
+        .profile-trigger img {
+            width: 45px;
+            !important;
+            height: 45px;
+            !important;
+            border-radius: 50%;
             border: 2px solid #e0e0e0;
             cursor: pointer;
-            transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out; 
+            transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out;
         }
-        
+
         .profile-trigger:hover img {
             border-color: #1EC6B6;
-            transform: translateY(-3px); 
+            transform: translateY(-3px);
         }
-        
-        .profile-dropdown-content { 
-            display: none; 
-            position: absolute; 
-            background-color: #fff; 
-            min-width: 220px; 
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
-            border-radius: 8px; 
-            right: 0; 
+
+        .profile-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            right: 0;
             top: 46px;
             border: 1px solid #f0f0f0;
         }
-        
+
         .profile-dropdown-content.show {
             display: block;
         }
 
-        .profile-dropdown-header { 
-            padding: 15px; 
-            border-bottom: 1px solid #f0f0f0; 
+        .profile-dropdown-header {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
             font-weight: bold;
             color: #333;
         }
-        
-        .profile-dropdown-content a { 
-            color: #333; 
-            padding: 12px 15px; 
-            text-decoration: none; 
+
+        .profile-dropdown-content a {
+            color: #333;
+            padding: 12px 15px;
+            text-decoration: none;
             display: flex;
             align-items: center;
             font-size: 14px;
         }
-        .profile-dropdown-content a:hover { 
-            background-color: #f5f5f5; 
+
+        .profile-dropdown-content a:hover {
+            background-color: #f5f5f5;
         }
-        .profile-dropdown-content a i { 
-            margin-right: 12px; 
+
+        .profile-dropdown-content a i {
+            margin-right: 12px;
             color: #555;
             width: 18px;
         }
@@ -112,20 +121,15 @@ header("Expires: 0");
 </head>
 
 <body>
-    <!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-
-    <!--header start -->
     <header>
         <div class="header-area ">
-           <div id="sticky-header" class="main-header-area">
+            <div id="sticky-header" class="main-header-area">
                 <div class="container-fluid">
                     <div class="header_bottom_border">
                         <div class="row align-items-center">
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.php"><img src="img/logo.png" alt=""></a>
+                                    <a href="index.php"><img src="img/logo.png" class="img-fluid" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-xl-7 col-lg-7">
@@ -142,6 +146,13 @@ header("Expires: 0");
                                                 </ul>
                                             </li>
                                             <li><a href="contact.php">Kontak</a></li>
+
+                                            <?php if (isset($_SESSION['user_id']) || isset($_SESSION['admin_username'])): ?>
+                                                <li class="d-lg-none"><a href="my_reservations.php">Reservasi Saya</a></li>
+                                                <li class="d-lg-none"><a href="logout.php">Logout</a></li>
+                                            <?php else: ?>
+                                                <li class="d-lg-none"><a href="login.php">Login</a></li>
+                                            <?php endif; ?>
                                         </ul>
                                     </nav>
                                 </div>
@@ -151,17 +162,19 @@ header("Expires: 0");
                                     <div class="number">
                                         <p><i class="fa fa-phone"></i> +62 0000 1111 123</p>
                                     </div>
-                                    
+
                                     <?php if (isset($_SESSION['user_id']) || isset($_SESSION['admin_username'])): ?>
                                         <div class="profile-dropdown">
                                             <div class="profile-trigger" id="profileTrigger">
-                                                <img src="img/assets/icon/default-profile.png" alt="Profile">
+                                                <img src="img/assets/icon/default-profile.png" class="img-fluid" alt="Profile">
                                             </div>
                                             <div id="profileDropdownContent" class="profile-dropdown-content">
                                                 <div class="profile-dropdown-header">
-                                                    Halo, <?php echo isset($_SESSION['user_name']) ? htmlspecialchars($_SESSION['user_name']) : 'Admin'; ?>
+                                                    Halo,
+                                                    <?php echo isset($_SESSION['user_name']) ? htmlspecialchars($_SESSION['user_name']) : 'Admin'; ?>
                                                 </div>
-                                                <a href="my_reservations.php"><i class="fa fa-calendar-check-o"></i> Reservasi Saya</a>
+                                                <a href="my_reservations.php"><i class="fa fa-calendar-check-o"></i>
+                                                    Reservasi Saya</a>
                                                 <a href="logout.php"><i class="fa fa-sign-out"></i> Log out</a>
                                             </div>
                                         </div>
@@ -179,6 +192,3 @@ header("Expires: 0");
             </div>
         </div>
     </header>
-    <!-- header-end -->
-</body>
-</html>
